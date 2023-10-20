@@ -6,10 +6,6 @@ setting: |-
   prefix_keys_for_changing_layer [:zr, :zl, :l]
 
   layer :up do
-    flip :zr, if_pressed: :zr, force_neutral: :zl
-    flip :a, if_pressed: [:a]
-    flip :down, if_pressed: :down
-    remap :l, to: :zr
   end
 
   layer :right do

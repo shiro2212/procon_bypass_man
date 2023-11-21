@@ -114,7 +114,7 @@ class ProconBypassMan::Procon
           threshold = (if_tilted_left_stick_value.is_a?(Hash) && if_tilted_left_stick_value[:threshold]) || ProconBypassMan::AnalogStickTiltingPowerScaler::DEFAULT_THRESHOLD
           degreeFrom = (if_tilted_left_stick_value.is_a?(Hash) && if_tilted_left_stick_value[:degreeFrom]) || 0
           degreeTo = (if_tilted_left_stick_value.is_a?(Hash) && if_tilted_left_stick_value[:degreeTo]) || 359
-          isAngleRange = @left_stick_tilting_angle.widthinAngleRange?(analog_stick.relative_x, analog_stick.relative_y, degreeFrom:degreeFrom, degreeTo:degreeTo)
+          isAngleRange = @left_stick_tilting_angle.widthinAngleRange?(current_position_x: analog_stick.relative_x, current_position_y:analog_stick.relative_y, degreeFrom:degreeFrom, degreeTo:degreeTo)
           isTilt = dumped_tilting_power.tilting?(threshold: threshold, current_position_x: analog_stick.relative_x, current_position_y: analog_stick.relative_y)
           isPressButton = user_operation.pressing_all_buttons?(options[:if_pressed])
           if isTilt && isPressButton && isAngleRange

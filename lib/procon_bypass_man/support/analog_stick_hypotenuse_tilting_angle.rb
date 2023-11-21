@@ -7,7 +7,7 @@ class ProconBypassMan::AnalogStickTiltingAngle
       return false
     end
 
-    degree = getDegree(current_position_x , current_position_y)
+    degree = getDegree(current_position_x:current_position_x , current_position_y:current_position_y)
     return degreeFrom <= degree && degree <= degreeTo
   end
 

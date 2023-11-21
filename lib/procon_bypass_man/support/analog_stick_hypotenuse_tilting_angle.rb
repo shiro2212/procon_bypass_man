@@ -1,7 +1,7 @@
 class ProconBypassMan::AnalogStickTiltingAngle
 
   # @return [Boolean]
-  def widthinAngleRange?(current_position_x: , current_position_y: , degreeFrom: , degreeTo:)
+  def widthinAngleRange?(current_position_x: , current_position_y: , degreeFrom: -360, degreeTo: 360)
     # スティックがニュートラルな時
     if (-200..200).include?(current_position_x) && (-200..200).include?(current_position_y)
       return false

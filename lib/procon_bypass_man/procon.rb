@@ -42,6 +42,7 @@ class ProconBypassMan::Procon
       binary.dup
     )
     @left_stick_tilting_power_scaler = ProconBypassMan::AnalogStickTiltingPowerScaler.new
+    @left_stick_tilting_angle = ProconBypassMan::AnalogStickTiltingAngle.new
   end
 
   def status
@@ -111,7 +112,12 @@ class ProconBypassMan::Procon
 
         if(if_tilted_left_stick_value = options[:if_tilted_left_stick])
           threshold = (if_tilted_left_stick_value.is_a?(Hash) && if_tilted_left_stick_value[:threshold]) || ProconBypassMan::AnalogStickTiltingPowerScaler::DEFAULT_THRESHOLD
-          if dumped_tilting_power.tilting?(threshold: threshold, current_position_x: analog_stick.relative_x, current_position_y: analog_stick.relative_y) && user_operation.pressing_all_buttons?(options[:if_pressed])
+          degreeFrom = (if_tilted_left_stick_value.is_a?(Hash) && if_tilted_left_stick_value[:degreeFrom]) || 0
+          degreeTo = (if_tilted_left_stick_value.is_a?(Hash) && if_tilted_left_stick_value[:degreeTo]) || 359
+          isAngleRange = @left_stick_tilting_angle.widthinAngleRange?(analog_stick.relative_x, analog_stick.relative_y, degreeFrom:degreeFrom, degreeTo:degreeTo)
+          isTilt = dumped_tilting_power.tilting?(threshold: threshold, current_position_x: analog_stick.relative_x, current_position_y: analog_stick.relative_y)
+          isPressButton = user_operation.pressing_all_buttons?(options[:if_pressed])
+          if isTilt && isPressButton && isAngleRange
             @@status[:ongoing_macro] = MacroRegistry.load(macro_name)
             break
           end

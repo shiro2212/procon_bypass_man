@@ -105,33 +105,65 @@ class ProconBypassMan::Procon::MacroBuilder
       return { steps: for_forward_ikarole_steps }
     end
 
-    if /^forward_ikarole/ =~ step
+    if /^forward_ikarole_r/ =~ step
       for_forward_ikarole_steps = [
-        [:tilt_left_stick_completely_to_315deg, :b],
+        [:tilt_left_stick_completely_to_180deg, :b],
         [:tilt_left_stick_completely_to_90deg],
       ]
       return { steps: for_forward_ikarole_steps }
     end
 
-    if /^backward_ikarole/ =~ step
+    if /^forward_ikarole_l/ =~ step
+      for_forward_ikarole_steps = [
+        [:tilt_left_stick_completely_to_0deg, :b],
+        [:tilt_left_stick_completely_to_90deg],
+      ]
+      return { steps: for_forward_ikarole_steps }
+    end
+
+    if /^backward_ikarole_r/ =~ step
       for_backward_ikarole_steps = [
-        [:tilt_left_stick_completely_to_45deg, :b],
+        [:tilt_left_stick_completely_to_180deg, :b],
         [:tilt_left_stick_completely_to_270deg],
       ]
       return { steps: for_backward_ikarole_steps }
     end
 
-    if /^right_ikarole/ =~ step
+    if /^backward_ikarole_l/ =~ step
+      for_backward_ikarole_steps = [
+        [:tilt_left_stick_completely_to_0deg, :b],
+        [:tilt_left_stick_completely_to_270deg],
+      ]
+      return { steps: for_backward_ikarole_steps }
+    end
+
+    if /^right_ikarole_r/ =~ step
       for_right_ikarole_steps = [
-        [:tilt_left_stick_completely_to_135deg, :b],
+        [:tilt_left_stick_completely_to_90deg, :b],
         [:tilt_left_stick_completely_to_0deg],
       ]
       return { steps: for_right_ikarole_steps }
     end
 
-    if /^left_ikarole/ =~ step
+    if /^right_ikarole_l/ =~ step
+      for_right_ikarole_steps = [
+        [:tilt_left_stick_completely_to_270deg, :b],
+        [:tilt_left_stick_completely_to_0deg],
+      ]
+      return { steps: for_right_ikarole_steps }
+    end
+
+    if /^left_ikarole_r/ =~ step
       for_left_ikarole_steps = [
-        [:tilt_left_stick_completely_to_45deg, :b],
+        [:tilt_left_stick_completely_to_270deg, :b],
+        [:tilt_left_stick_completely_to_180deg],
+      ]
+      return { steps: for_left_ikarole_steps }
+    end
+
+    if /^left_ikarole_l/ =~ step
+      for_left_ikarole_steps = [
+        [:tilt_left_stick_completely_to_90deg, :b],
         [:tilt_left_stick_completely_to_180deg],
       ]
       return { steps: for_left_ikarole_steps }

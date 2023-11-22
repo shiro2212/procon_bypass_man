@@ -107,8 +107,8 @@ class ProconBypassMan::Procon::MacroBuilder
 
     if /^forward_ikarole_r/ =~ step
       for_forward_ikarole_steps = [
-        [:tilt_left_stick_completely_to_70deg],
-        [:tilt_left_stick_completely_to_160deg, :b],
+        [:tilt_left_stick_completely_to_40deg],
+        [:tilt_left_stick_completely_to_130deg, :b],
         [:tilt_left_stick_completely_to_90deg],
       ]
       return { steps: for_forward_ikarole_steps }

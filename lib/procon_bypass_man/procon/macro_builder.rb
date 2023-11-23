@@ -151,32 +151,44 @@ class ProconBypassMan::Procon::MacroBuilder
 
     if /^right_ikarole_r/ =~ step
       for_right_ikarole_steps = [
-        [:tilt_left_stick_completely_to_90deg, :b],
-        [:tilt_left_stick_completely_to_0deg],
+        [:tilt_left_stick_completely_to_270deg],
+        [:tilt_left_stick_completely_to_270deg],
+        [:tilt_left_stick_completely_to_270deg],
+        [:tilt_left_stick_completely_to_270deg],
+        [:tilt_left_stick_completely_to_50deg, :b],
       ]
       return { steps: for_right_ikarole_steps }
     end
 
     if /^right_ikarole_l/ =~ step
       for_right_ikarole_steps = [
-        [:tilt_left_stick_completely_to_270deg, :b],
-        [:tilt_left_stick_completely_to_0deg],
+        [:tilt_left_stick_completely_to_90deg],
+        [:tilt_left_stick_completely_to_90deg],
+        [:tilt_left_stick_completely_to_90deg],
+        [:tilt_left_stick_completely_to_90deg],
+        [:tilt_left_stick_completely_to_310deg, :b],
       ]
       return { steps: for_right_ikarole_steps }
     end
 
     if /^left_ikarole_r/ =~ step
       for_left_ikarole_steps = [
-        [:tilt_left_stick_completely_to_270deg, :b],
-        [:tilt_left_stick_completely_to_180deg],
+        [:tilt_left_stick_completely_to_90deg],
+        [:tilt_left_stick_completely_to_90deg],
+        [:tilt_left_stick_completely_to_90deg],
+        [:tilt_left_stick_completely_to_90deg],
+        [:tilt_left_stick_completely_to_230deg, :b],
       ]
       return { steps: for_left_ikarole_steps }
     end
 
     if /^left_ikarole_l/ =~ step
       for_left_ikarole_steps = [
-        [:tilt_left_stick_completely_to_90deg, :b],
-        [:tilt_left_stick_completely_to_180deg],
+        [:tilt_left_stick_completely_to_270deg],
+        [:tilt_left_stick_completely_to_270deg],
+        [:tilt_left_stick_completely_to_270deg],
+        [:tilt_left_stick_completely_to_270deg],
+        [:tilt_left_stick_completely_to_130deg, :b],
       ]
       return { steps: for_left_ikarole_steps }
     end

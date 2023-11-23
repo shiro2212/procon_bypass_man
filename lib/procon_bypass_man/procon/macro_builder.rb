@@ -144,7 +144,7 @@ class ProconBypassMan::Procon::MacroBuilder
         [:tilt_left_stick_completely_to_180deg],
         [:tilt_left_stick_completely_to_180deg],
         [:tilt_left_stick_completely_to_180deg],
-        [:tilt_left_stick_completely_to_320deg, :b],
+        [:tilt_left_stick_completely_to_330deg, :b],
       ]
       return { steps: for_backward_ikarole_steps }
     end

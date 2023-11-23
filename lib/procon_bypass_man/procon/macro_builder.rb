@@ -110,15 +110,17 @@ class ProconBypassMan::Procon::MacroBuilder
         [:tilt_left_stick_completely_to_0deg],
         [:tilt_left_stick_completely_to_0deg],
         [:tilt_left_stick_completely_to_0deg],
-        [:tilt_left_stick_completely_to_130deg, :b],
+        [:tilt_left_stick_completely_to_135deg, :b],
       ]
       return { steps: for_forward_ikarole_steps }
     end
 
     if /^forward_ikarole_l/ =~ step
       for_forward_ikarole_steps = [
-        [:tilt_left_stick_completely_to_0deg, :b],
-        [:tilt_left_stick_completely_to_90deg],
+        [:tilt_left_stick_completely_to_180deg],
+        [:tilt_left_stick_completely_to_180deg],
+        [:tilt_left_stick_completely_to_180deg],
+        [:tilt_left_stick_completely_to_45deg, :b],
       ]
       return { steps: for_forward_ikarole_steps }
     end

@@ -12,6 +12,7 @@ module ProconBypassMan
       # @raise [ParseError]
       # @return [ExternalData] JSON か カンマ区切りのbuttons
       def self.parse!(raw_data)
+        ProconBypassMan.logger.debug { "[ExternalInput][ExternalData]:start ExternalData.parse! " }
         raise ParseError unless raw_data.ascii_only?
         ProconBypassMan.logger.debug { "[ExternalInput][ExternalData]:raw_data:#{raw_data}" }
         ProconBypassMan.logger.debug { "[ExternalInput][ExternalData]:is_json:#{is_json(raw_data)}" }

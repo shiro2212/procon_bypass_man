@@ -56,6 +56,7 @@ class ProconBypassMan::Bypass::ProconToSwitch
           # TODO: シリアルぽーとから読み取ると252.chrみたいなゴミデータを受け取ってEncoding::UndefinedConversionErrorが発生する可能性がある. 発生したら上限までretryした方がいいかも
           if(data = ProconBypassMan::ExternalInput.read)
             begin
+              ProconBypassMan.logger.debug {"[ExternalInput] ExternalData.parse!(data) start"}
               external_input_data = ProconBypassMan::ExternalInput::ExternalData.parse!(data)
               ProconBypassMan.logger.debug { "[ExternalInput] 読み取った値: { hex: #{external_input_data.hex}, raw_data: '#{external_input_data.raw_data}', buttons: #{external_input_data.buttons} }" }
             rescue ProconBypassMan::ExternalInput::ParseError => e

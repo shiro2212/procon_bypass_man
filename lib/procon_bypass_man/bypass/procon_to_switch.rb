@@ -37,8 +37,7 @@ class ProconBypassMan::Bypass::ProconToSwitch
             return(false) if will_terminate?
             raw_output = self.procon.read_nonblock(64)
           rescue IO::EAGAINWaitReadable
-            ProconBypassMan.logger.debug { "[ProconToSwitch]raise EAGAINWaitReadable" }
-            sleep(0.002)
+            sleep(0.0016)
             retry
           rescue Errno::EIO, Errno::ENODEV, Errno::EPROTO, IOError, Errno::ESHUTDOWN, Errno::ETIMEDOUT => e
             return(false) if will_terminate?

@@ -26,7 +26,7 @@ module ProconBypassMan
           buffer = ''
           loop do
             begin
-              buffer += @serial_port.read_nonblock(64) || ''
+              buffer += @serial_port.read_nonblock(1024) || ''
             rescue ::IO::EAGAINWaitReadable
               break
             end

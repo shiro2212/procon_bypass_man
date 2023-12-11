@@ -33,9 +33,7 @@ module ProconBypassMan
           end
 
           return nil if buffer.empty?
-          ProconBypassMan::SendErrorCommand.execute(
-              error: "[ExternalInput] 実行時間: #{Time.now - start_time})"
-            )
+          ProconBypassMan.logger.error{"[ExternalInput] 実行時間: #{Time.now - start_time})"}
           # NOTE: 高速に書き込まれた場合、複数のチャンクを含む可能性があるので、最初だけを切り取る
           chunks = buffer.split("\n")
           if(chunks.size > 1)

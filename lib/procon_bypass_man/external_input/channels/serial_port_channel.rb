@@ -22,6 +22,7 @@ module ProconBypassMan
         # NOTE: read_nonblockでバッファから読み出すとき、バッファが空になるまでは::IO::EAGAINWaitReadableが起きない前提で実装している.
         # NOTE: 取りこぼししないよう精度を上げるには、終端文字が来るまで1文字ずつ読む必要があるがパフォーマンスが犠牲になってしまう. この対策をするには、bypass処理の開始で非同期に1文字ずつ読み込むことをすると多少マシになるはず
         def read
+          start_time = Time.now
           buffer = ''
           loop do
             begin
@@ -32,7 +33,9 @@ module ProconBypassMan
           end
 
           return nil if buffer.empty?
-
+          ProconBypassMan::SendErrorCommand.execute(
+              error: "[ExternalInput] 実行時間: #{Time.now - start_time})"
+            )
           # NOTE: 高速に書き込まれた場合、複数のチャンクを含む可能性があるので、最初だけを切り取る
           chunks = buffer.split("\n")
           if(chunks.size > 1)

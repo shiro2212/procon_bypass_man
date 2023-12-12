@@ -202,7 +202,7 @@ class ProconBypassMan::Procon::MacroBuilder
         [:none],
         [:none],
         [:none],
-        [:none],
+        [:tilt_right_stick_completely_to_180deg],
         [:tilt_right_stick_completely_to_180deg],
         [:tilt_right_stick_completely_to_180deg],
         [:tilt_right_stick_completely_to_180deg],

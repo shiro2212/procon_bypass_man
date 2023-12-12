@@ -13,6 +13,7 @@ class ProconBypassMan::Procon::AnalogRightStickManipulator
       neutral_position = ProconBypassMan::ButtonsSettingConfiguration.instance.neutral_position
       self.manipulated_abs_x = (syahen * Math.cos(arc_degree * Math::PI / 180)).to_i - neutral_position.x
       self.manipulated_abs_y = (syahen * Math.sin(arc_degree * Math::PI / 180)).to_i - neutral_position.y
+      ProconBypassMan.logger.debug "[AnalogRightStickManipulator] #{self.manipulated_abs_x}, #{self.manipulated_abs_y}"
       return
     end
 

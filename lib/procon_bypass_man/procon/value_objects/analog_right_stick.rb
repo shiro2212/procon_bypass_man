@@ -7,6 +7,7 @@ class ProconBypassMan::Procon::AnalogRightStick
   def initialize(binary: )
     @neutral_position = ProconBypassMan::ButtonsSettingConfiguration.instance.neutral_position
     bytes = binary[ProconBypassMan::Procon::ButtonCollection::RIGHT_ANALOG_STICK.fetch(:byte_position)]
+    ProconBypassMan.logger.debug "[AnalogRightStick] #{bytes}"
     byte6, byte7, byte8 = bytes.each_char.map { |x| x.unpack("C").first.to_s(2).rjust(8, "0") }
 
     self.bin_x = "#{byte7[4..7]}#{byte6}"

@@ -212,6 +212,7 @@ class ProconBypassMan::Procon::MacroBuilder
         [:tilt_right_stick_completely_to_0deg],
         [:tilt_right_stick_completely_to_0deg],
         [:tilt_right_stick_completely_to_0deg],
+        [:tilt_right_stick_completely_to_0deg],
 
       ]
       return { steps: steps }

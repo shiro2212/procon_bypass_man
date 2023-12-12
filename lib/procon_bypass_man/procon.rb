@@ -4,6 +4,7 @@ require "procon_bypass_man/procon/macro_plugin_map"
 
 class ProconBypassMan::Procon
   require "procon_bypass_man/procon/value_objects/analog_stick"
+  require "procon_bypass_man/procon/value_objects/analog_right_stick"
   require "procon_bypass_man/procon/value_objects/analog_stick_position"
   require "procon_bypass_man/procon/value_objects/procon_reader"
   require "procon_bypass_man/procon/value_objects/rumble_binary"

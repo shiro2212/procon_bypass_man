@@ -197,7 +197,7 @@ class ProconBypassMan::Procon::MacroBuilder
       steps = [
         [:tilt_right_stick_completely_to_0deg, :zr],
         [:tilt_right_stick_completely_to_0deg, :zr],
-        [:tilt_right_stick_completely_to_0deg, :zr],
+        [:none],
         [:none],
         [:none],
         [:none],

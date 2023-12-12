@@ -50,6 +50,11 @@ class ProconBypassMan::Domains::ProcessingProconBinary < ProconBypassMan::Domain
     binary[6..8] = ProconBypassMan::Procon::AnalogStickManipulator.new(binary, method: step).to_binary
   end
 
+  # @param [Symbol] stick method
+  def write_as_tilt_right_stick(step)
+    binary[9..11] = ProconBypassMan::Procon::AnalogRightStickManipulator.new(binary, method: step).to_binary
+  end
+
   # @param [Symbol] button
   def write_as_unpress_button(button)
     raise "do not press button(#{button}) yet" if not ProconBypassMan::PressButtonAware.new(binary).pressing_button?(button)

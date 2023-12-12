@@ -218,29 +218,27 @@ class ProconBypassMan::Procon::MacroBuilder
       return { steps: steps }
     end
 
-    if /^left_mopu_nagi/ =~ step
+    if /^right_bake_nagi/ =~ step
       steps = [
-        [:zr],
+        [:tilt_right_stick_completely_to_180deg, :zr],
+        [:tilt_right_stick_completely_to_180deg, :zr],
         [:none],
         [:none],
         [:none],
         [:none],
         [:none],
-        [:none],
-        [:none],
-        [:none],
-        [:none],
-        [:none],
-        [:tilt_right_stick_completely_to_180deg],
-        [:tilt_right_stick_completely_to_180deg],
-        [:tilt_right_stick_completely_to_180deg],
-        [:tilt_right_stick_completely_to_180deg],
-        [:tilt_right_stick_completely_to_180deg],
-        [:tilt_right_stick_completely_to_180deg],
         [:tilt_right_stick_completely_to_0deg],
         [:tilt_right_stick_completely_to_0deg],
         [:tilt_right_stick_completely_to_0deg],
         [:tilt_right_stick_completely_to_0deg],
+        [:tilt_right_stick_completely_to_0deg],
+        [:tilt_right_stick_completely_to_0deg],
+        [:tilt_right_stick_completely_to_0deg],
+        [:tilt_right_stick_completely_to_180deg],
+        [:tilt_right_stick_completely_to_180deg],
+        [:tilt_right_stick_completely_to_180deg],
+        [:tilt_right_stick_completely_to_180deg],
+
       ]
       return { steps: steps }
     end

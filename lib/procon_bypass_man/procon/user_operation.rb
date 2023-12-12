@@ -48,6 +48,8 @@ class ProconBypassMan::Procon::UserOperation
         binary.write_as_press_button(ms)
       elsif is_stick?(ms)
         binary.write_as_tilt_left_stick(ms)
+      elsif is_r_stick?(ms)
+        binary.write_as_tilt_right_stick(ms)
       else
         warn "知らないmacro stepです"
       end
@@ -85,6 +87,11 @@ class ProconBypassMan::Procon::UserOperation
 
   # @return [Boolean]
   def is_stick?(step)
-    !!(step =~ /\Atilt_/)
+    !!(step =~ /\Atilt_left/)
+  end
+
+  # @return [Boolean]
+  def is_r_stick?(step)
+    !!(step =~ /\Atilt_right/)
   end
 end

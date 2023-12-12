@@ -195,7 +195,16 @@ class ProconBypassMan::Procon::MacroBuilder
 
     if /^left_nagi/ =~ step
       steps = [
-        [:tilt_right_stick_completely_to_180deg, :zr],
+        [:zr],
+        [:none],
+        [:none],
+        [:none],
+        [:none],
+        [:none],
+        [:none],
+        [:none],
+        [:none],
+        [:none],
         [:tilt_right_stick_completely_to_180deg],
         [:tilt_right_stick_completely_to_180deg],
         [:tilt_right_stick_completely_to_180deg],

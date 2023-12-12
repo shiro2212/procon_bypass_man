@@ -193,11 +193,36 @@ class ProconBypassMan::Procon::MacroBuilder
       return { steps: for_left_ikarole_steps }
     end
 
-    if /^left_nagi/ =~ step
+    if /^left_bake_nagi/ =~ step
       steps = [
         [:zr],
+        [:none],
+        [:none],
+        [:none],
+        [:none],
+        [:none],
+        [:tilt_right_stick_completely_to_180deg],
+        [:tilt_right_stick_completely_to_180deg],
+        [:tilt_right_stick_completely_to_180deg],
+        [:tilt_right_stick_completely_to_180deg],
+        [:tilt_right_stick_completely_to_180deg],
+        [:tilt_right_stick_completely_to_180deg],
         [:tilt_right_stick_completely_to_0deg],
         [:tilt_right_stick_completely_to_0deg],
+        [:tilt_right_stick_completely_to_0deg],
+        [:tilt_right_stick_completely_to_0deg],
+      ]
+      return { steps: steps }
+    end
+
+    if /^left_mopu_nagi/ =~ step
+      steps = [
+        [:zr],
+        [:none],
+        [:none],
+        [:none],
+        [:none],
+        [:none],
         [:none],
         [:none],
         [:none],

@@ -4,6 +4,7 @@ class ProconBypassMan::Procon::AnalogRightStickManipulator
   attr_accessor :manipulated_abs_x, :manipulated_abs_y
 
   def initialize(binary, method: )
+    ProconBypassMan.logger.debug "[AnalogRightStickManipulator] initialize"
     analog_stick = ProconBypassMan::Procon::AnalogRightStick.new(binary: binary)
 
     if method =~ /tilt_right_stick_(completely)_to_(\d+)deg/

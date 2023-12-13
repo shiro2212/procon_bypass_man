@@ -23,8 +23,6 @@ class ProconBypassMan::Procon::ButtonCollection
     6 => [],
     7 => [],
     8 => [],
-    13 => [],
-    14 => []
   }.freeze
 
   BUTTONS_MAP = BYTES_MAP.reduce({}) { |acc, value|

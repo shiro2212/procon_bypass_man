@@ -65,8 +65,10 @@ class ProconBypassMan::Bypass::ProconToSwitch
         end
 
         gyro = nil
+        ProconBypassMan.logger.debug { "[ExternalInput] gyro0"}
         if !(external_input_data.nil?)
-          if external_input_data.buttons.include?(":unzr")
+          ProconBypassMan.logger.debug { "[ExternalInput] nil?"}
+          if external_input_data.raw_data.include?(":unzr")
             gyro = BlueGreenProcess::SharedVariable.instance.data["recent_gyro"][7]
             ProconBypassMan.logger.debug { "[ExternalInput] gyro:#{gyro}"}
           end

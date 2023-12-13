@@ -65,12 +65,9 @@ class ProconBypassMan::Bypass::ProconToSwitch
         end
 
         gyro = nil
-        ProconBypassMan.logger.debug { "[ExternalInput] gyro0"}
         if !(external_input_data.nil?)
-          ProconBypassMan.logger.debug { "[ExternalInput] nil?"}
           if external_input_data.raw_data.include?(":unzr")
             gyro = BlueGreenProcess::SharedVariable.instance.data["recent_gyro"][7]
-            ProconBypassMan.logger.debug { "[ExternalInput] gyro:#{gyro}"}
           end
         end
 
@@ -82,7 +79,7 @@ class ProconBypassMan::Bypass::ProconToSwitch
                 return(false) if will_terminate? # rubocop:disable Lint/NoReturnInBeginEndBlocks
 
                 binary = ::ProconBypassMan::Procon::Rumbler.monitor do
-                  ProconBypassMan::Processor.new(bypass_value.binary).process(external_input_data: external_input_data)
+                  ProconBypassMan::Processor.new(bypass_value.binary).process(external_input_data: external_input_data, gyro:gyro)
                 end
                 self.gadget.write_nonblock(binary)
 

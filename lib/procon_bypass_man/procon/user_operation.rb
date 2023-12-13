@@ -23,6 +23,10 @@ class ProconBypassMan::Procon::UserOperation
     binary.write_as_apply_left_analog_stick_cap(cap: cap)
   end
 
+  def apply_gyro(gyro: )
+    binary.write_as_apply_gyro(gyro: gyro)
+  end
+
   # @param [Symbol] button
   def unpress_button(button)
     return if not pressing_button?(button)

@@ -214,7 +214,7 @@ class ProconBypassMan::Procon
 
   # @param [ProconBypassMan::ExternalInput::ExternalData, NilClass] external_input_data
   # @return [String]
-  def to_binary(external_input_data: nil)
+  def to_binary(external_input_data: nil, gyro: nil)
     if ongoing_mode.name != :manual
       return user_operation.binary.raw
     end
@@ -230,6 +230,11 @@ class ProconBypassMan::Procon
           self.user_operation.unpress_button(button)
         end
       end
+      return self.user_operation.binary.raw
+    end
+
+    if gyro
+      self.user_operation.applyGyro(gyro:gyro)
       return self.user_operation.binary.raw
     end
 

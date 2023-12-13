@@ -70,4 +70,8 @@ class ProconBypassMan::Domains::ProcessingProconBinary < ProconBypassMan::Domain
     analog_stick_cap = ProconBypassMan::Procon::AnalogStickCap.new(binary)
     binary[6..8] = analog_stick_cap.capped_position(cap_hypotenuse: cap).to_binary
   end
+
+  def write_as_apply_gyro(gyro: )
+    binary[13..24] = gyro
+  end
 end

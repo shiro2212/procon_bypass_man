@@ -93,6 +93,7 @@ class ProconBypassMan::Procon
     analog_stick = ProconBypassMan::Procon::AnalogStick.new(binary: user_operation.binary.raw)
     add_recent_left_stick_hypotenuses(analog_stick.relative_hypotenuse)
     dumped_tilting_power = @left_stick_tilting_power_scaler.calculate(recent_left_stick_hypotenuses)
+    ProconBypassMan.logger.debug("[procon giro] #{user_operation.binary.raw[13..24]}")
 
     enable_all_macro = true
     enable_macro_map = Hash.new {|h,k| h[k] = true }

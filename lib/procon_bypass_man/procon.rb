@@ -33,6 +33,7 @@ class ProconBypassMan::Procon
     BlueGreenProcess::SharedVariable.instance.data["buttons"] = {}
     BlueGreenProcess::SharedVariable.instance.data["current_layer_key"] = :up
     BlueGreenProcess::SharedVariable.instance.data["recent_left_stick_hypotenuses"] = []
+    BlueGreenProcess::SharedVariable.instance.data["recent_gyro"] = []
   end
   reset!
 
@@ -71,6 +72,18 @@ class ProconBypassMan::Procon
     BlueGreenProcess::SharedVariable.instance.data["recent_left_stick_hypotenuses"]
   end
 
+  RECENT_GYRO_LIMIT = 10
+  def add_recent_gyro(gyro)
+    if (overflowed_size = recent_gyro.size - RECENT_GYRO_LIMIT)
+      overflowed_size.times { recent_gyro.shift }
+    end
+    recent_gyro << gyro
+  end
+
+  def recent_gyro
+    BlueGreenProcess::SharedVariable.instance.data["recent_gyro"]
+  end
+
   def ongoing_macro; @@status[:ongoing_macro]; end
   def ongoing_mode; @@status[:ongoing_mode]; end
 
@@ -93,7 +106,7 @@ class ProconBypassMan::Procon
     analog_stick = ProconBypassMan::Procon::AnalogStick.new(binary: user_operation.binary.raw)
     add_recent_left_stick_hypotenuses(analog_stick.relative_hypotenuse)
     dumped_tilting_power = @left_stick_tilting_power_scaler.calculate(recent_left_stick_hypotenuses)
-    ProconBypassMan.logger.debug("[procon giro] #{user_operation.binary.raw[13].unpack("i").first.to_s(2).rjust(8, "0")}")
+    add_recent_gyro(user_operation.binary.raw[13..24])
 
     enable_all_macro = true
     enable_macro_map = Hash.new {|h,k| h[k] = true }

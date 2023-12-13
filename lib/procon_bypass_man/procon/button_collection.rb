@@ -23,6 +23,8 @@ class ProconBypassMan::Procon::ButtonCollection
     6 => [],
     7 => [],
     8 => [],
+    13 => [],
+    14 => []
   }.freeze
 
   BUTTONS_MAP = BYTES_MAP.reduce({}) { |acc, value|
@@ -31,6 +33,7 @@ class ProconBypassMan::Procon::ButtonCollection
       next(acc) if button == :grip || button == :_undefined_key
       acc[button] = { byte_position: value[0], bit_position: index }
     end
+    ProconBypassMan.logger.debug {"[ExternalInput] #{acc}"}
     acc
   }.freeze
 

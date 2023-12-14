@@ -230,14 +230,14 @@ class ProconBypassMan::Procon
           self.user_operation.unpress_button(button)
         end
       end
+      if gyro
+        ProconBypassMan.logger.debug {"[procon] gyro: #{gyro}"}
+        self.user_operation.apply_gyro(gyro:gyro)
+      end
       return self.user_operation.binary.raw
     end
 
-    if gyro
-      ProconBypassMan.logger.debug {"[procon] gyro: #{gyro}"}
-      self.user_operation.apply_gyro(gyro:gyro)
-      return self.user_operation.binary.raw
-    end
+    
 
     if ongoing_macro.ongoing? && (step = ongoing_macro.next_step)
       BlueGreenProcess::SharedVariable.extend_run_on_this_process = true

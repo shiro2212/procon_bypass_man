@@ -234,6 +234,7 @@ class ProconBypassMan::Procon
     end
 
     if gyro
+      ProconBypassMan.logger.debug {"[procon] gyro: #{gyro}"}
       self.user_operation.apply_gyro(gyro:gyro)
       return self.user_operation.binary.raw
     end

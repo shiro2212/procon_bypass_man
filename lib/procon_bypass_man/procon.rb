@@ -34,7 +34,7 @@ class ProconBypassMan::Procon
     BlueGreenProcess::SharedVariable.instance.data["buttons"] = {}
     BlueGreenProcess::SharedVariable.instance.data["current_layer_key"] = :up
     BlueGreenProcess::SharedVariable.instance.data["recent_left_stick_hypotenuses"] = []
-    BlueGreenProcess::SharedVariable.instance.data["recent_gyro"] = []
+    # BlueGreenProcess::SharedVariable.instance.data["recent_gyro"] = []
   end
   reset!
 
@@ -73,17 +73,17 @@ class ProconBypassMan::Procon
     BlueGreenProcess::SharedVariable.instance.data["recent_left_stick_hypotenuses"]
   end
 
-  RECENT_GYRO_LIMIT = 10
-  def add_recent_gyro(gyro)
-    if (overflowed_size = recent_gyro.size - RECENT_GYRO_LIMIT)
-      overflowed_size.times { recent_gyro.shift }
-    end
-    recent_gyro << gyro
-  end
+  # RECENT_GYRO_LIMIT = 10
+  # def add_recent_gyro(gyro)
+  #   if (overflowed_size = recent_gyro.size - RECENT_GYRO_LIMIT)
+  #     overflowed_size.times { recent_gyro.shift }
+  #   end
+  #   recent_gyro << gyro
+  # end
 
-  def recent_gyro
-    BlueGreenProcess::SharedVariable.instance.data["recent_gyro"]
-  end
+  # def recent_gyro
+  #   BlueGreenProcess::SharedVariable.instance.data["recent_gyro"]
+  # end
 
   def ongoing_macro; @@status[:ongoing_macro]; end
   def ongoing_mode; @@status[:ongoing_mode]; end

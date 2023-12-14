@@ -3,8 +3,8 @@
 class ProconBypassMan::Procon::Gyro
   
     def initialize(binary: )
-        bytes13 = binary[13] & ((1 << 8) - 1)
-        bytes14 = binary[14] & ((1 << 8) - 1)
+        bytes13 = binary[13] >> 0 & ((1 << 8) - 1)
+        bytes14 = binary[14] >> 0 & ((1 << 8) - 1)
         # uint16le = (bytes14 << 8) | bytes13
         # int16le = uint16le
         # if uint16le >= 32768

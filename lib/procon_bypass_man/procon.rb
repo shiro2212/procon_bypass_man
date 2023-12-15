@@ -270,7 +270,7 @@ class ProconBypassMan::Procon
       if gyro
         self.user_operation.apply_gyro(gyro:gyro)
       end
-      ProconBypassMan.logger.debug {"[procon] bin[14]: #{self.user_operation.binary[14]}"}
+      ProconBypassMan.logger.debug {"[procon] bin[14]: #{self.user_operation.binary}"}
       return self.user_operation.binary.raw
     end
 

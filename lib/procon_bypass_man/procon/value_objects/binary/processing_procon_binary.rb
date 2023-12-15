@@ -72,6 +72,16 @@ class ProconBypassMan::Domains::ProcessingProconBinary < ProconBypassMan::Domain
   end
 
   def write_as_apply_gyro(gyro: )
+    accel_x = gyro[0]
+    accel_y = gyro[1]
+    accel_z = gyro[2]
+    gyro_1 = gyro[3]
+    gyro_2 = gyro[4]
+    gyro_3 = gyro[5]
+    ProconBypassMan.logger.debug {"[binary] start"}
+    ProconBypassMan.logger.debug {"[binary] #{binary[13..14]}"}
+    ProconBypassMan.logger.debug {"[binary] #{accel_x}"}
+    binary[13..14] = accel_x
     binary[13..24] = gyro
     binary[25..36] = gyro
     binary[37..48] = gyro

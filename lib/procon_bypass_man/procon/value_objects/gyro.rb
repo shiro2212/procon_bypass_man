@@ -19,29 +19,5 @@ class ProconBypassMan::Procon::Gyro
         [accel_x, accel_y, accel_z, gyro_1, gyro_2, gyro_3]
     end
 
-    def accel_x
-        accel_x
-    end
-        
-    def accel_y
-        accel_y
-    end
-
-    def accel_z
-        accel_z
-    end   
-
-    def gyro_1
-        gyro_1
-    end
-
-    def gyro_2
-        gyro_2
-    end
-
-    def gyro_2
-        gyro_2
-    end
-
 end
   

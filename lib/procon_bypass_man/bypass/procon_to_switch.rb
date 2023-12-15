@@ -69,7 +69,7 @@ class ProconBypassMan::Bypass::ProconToSwitch
           if external_input_data.raw_data.include?(":unzr")
             gyro = []
             frame = 7
-            ProconBypassMan.logger.debug {"[SharedVariable] hoeg"}
+            ProconBypassMan.logger.debug {"[SharedVariable] hoge: #{BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"]}"}
             gyro << BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][frame].pack("H*")
             gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_accel_y"][frame].pack("H*")
             gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"][frame].pack("H*")

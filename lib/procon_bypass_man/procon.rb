@@ -78,7 +78,7 @@ class ProconBypassMan::Procon
     BlueGreenProcess::SharedVariable.instance.data["recent_left_stick_hypotenuses"]
   end
 
-  RECENT_GYRO_LIMIT = 14
+  RECENT_GYRO_LIMIT = 100
   def add_recent_gyro(gyro)
     if (overflowed_size = recent_gyro_1.size - RECENT_GYRO_LIMIT)
       overflowed_size.times { recent_accel_x.shift }
@@ -94,6 +94,7 @@ class ProconBypassMan::Procon
     recent_gyro_1 << gyro[3]
     recent_gyro_2 << gyro[4]
     recent_gyro_3 << gyro[5]
+    ProconBypassMan.logger.debug{"[procon] add_recent_gyro"}
   end
 
   def recent_accel_x

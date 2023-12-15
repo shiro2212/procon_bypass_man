@@ -79,7 +79,7 @@ class ProconBypassMan::Domains::ProcessingProconBinary < ProconBypassMan::Domain
     gyro_2 = gyro[4]
     gyro_3 = gyro[5]
     ProconBypassMan.logger.debug {"[binary] start"}
-    ProconBypassMan.logger.debug {"[binary] #{binary[13..14]}"}
+    ProconBypassMan.logger.debug {"[binary] #{[binary[13],binary[14]]}"}
     ProconBypassMan.logger.debug {"[binary] #{[accel_x[0], accel_x[1]]}"}
     binary[13..14] = [accel_x[0], accel_x[1]]
     ProconBypassMan.logger.debug {"[binary] fin"}

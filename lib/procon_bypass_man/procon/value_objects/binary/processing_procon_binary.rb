@@ -78,6 +78,7 @@ class ProconBypassMan::Domains::ProcessingProconBinary < ProconBypassMan::Domain
     gyro_1 = gyro[3]
     gyro_2 = gyro[4]
     gyro_3 = gyro[5]
+    ProconBypassMan.logger.debug {"[SharedVariable] packbefore: #{[binary[14]]}"}
     binary[13] = accel_x[0]
     binary[14] = accel_x[1]
     binary[15] = accel_y[0]

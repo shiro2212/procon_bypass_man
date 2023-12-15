@@ -68,7 +68,7 @@ class ProconBypassMan::Bypass::ProconToSwitch
         if !(external_input_data.nil?)
           if external_input_data.raw_data.include?(":unzr")
             gyro = []
-            frame = 7
+            frame = 100
             gyro << BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][frame].pack("S*<")
             gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_accel_y"][frame].pack("S*<")
             gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"][frame].pack("S*<")

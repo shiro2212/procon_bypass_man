@@ -72,36 +72,31 @@ class ProconBypassMan::Domains::ProcessingProconBinary < ProconBypassMan::Domain
   end
 
   def write_as_apply_gyro(gyro: )
-    accel_x = gyro[0]
-    accel_y = gyro[1]
-    accel_z = gyro[2]
-    gyro_1 = gyro[3]
-    gyro_2 = gyro[4]
-    gyro_3 = gyro[5]
-    # binary[13] = accel_x[0]
-    # binary[14] = accel_x[1]
-    # binary[15] = accel_y[0]
-    # binary[16] = accel_y[1]
-    # binary[17] = accel_z[0]
-    # binary[18] = accel_z[1]
-    # binary[19] = gyro_1[0]
-    # binary[20] = gyro_1[1]
-    # binary[21] = gyro_2[0]
-    # binary[22] = gyro_2[1]
-    # binary[23] = gyro_3[0]
-    # binary[24] = gyro_3[1]
-    binary[13] = "\xFD"
-    binary[14] = "\xFD"
-    binary[15] = "\xFD"
-    binary[16] = "\xFD"
-    binary[17] = "\xFD"
-    binary[18] = "\xFD"
-    binary[19] = "\xFD"
-    binary[20] = "\xFD"
-    binary[21] = "\xFD"
-    binary[22] = "\xFD"
-    binary[23] = "\xFD"
-    binary[24] = "\xFD"
+    # accel_x = gyro[0]
+    # accel_y = gyro[1]
+    # accel_z = gyro[2]
+    # gyro_1 = gyro[3]
+    # gyro_2 = gyro[4]
+    # gyro_3 = gyro[5]
+    accel_x = [65535].pack("S*<")[0]
+    accel_y = [65535].pack("S*<")[1]
+    accel_z = [65535].pack("S*<")[0]
+    gyro_1 = [65535].pack("S*<")[1]
+    gyro_2 = [65535].pack("S*<")[0]
+    gyro_3 = [65535].pack("S*<")[1]
+    binary[13] = accel_x[0]
+    binary[14] = accel_x[1]
+    binary[15] = accel_y[0]
+    binary[16] = accel_y[1]
+    binary[17] = accel_z[0]
+    binary[18] = accel_z[1]
+    binary[19] = gyro_1[0]
+    binary[20] = gyro_1[1]
+    binary[21] = gyro_2[0]
+    binary[22] = gyro_2[1]
+    binary[23] = gyro_3[0]
+    binary[24] = gyro_3[1]
+    
     return binary
     # binary[13..24] = gyro
     # binary[25..36] = gyro

@@ -38,7 +38,7 @@ class ProconBypassMan::Procon::Gyro
         # if uint16le >= 32768
         #     int16le = uint16le - 65536
         # ProconBypassMan.logger.debug {"[gyro.rb] int16le:#{int16le}"}
-        ProconBypassMan.logger.debug {"[gyro.rb] accel_x:#{accel_x}, accel_y:#{accel_y}, accel_z:#{accel_z},, gyro_1:#{gyro_1}, gyro_2:#{gyro_2}, gyro_3:#{gyro_3}"}
+        # ProconBypassMan.logger.debug {"[gyro.rb] accel_x:#{accel_x}, accel_y:#{accel_y}, accel_z:#{accel_z},, gyro_1:#{gyro_1}, gyro_2:#{gyro_2}, gyro_3:#{gyro_3}"}
         ProconBypassMan.logger.debug {"[gyro.rb] accel_x_s:#{accel_x_s}, accel_y_s:#{accel_y_s}, accel_z_s:#{accel_z_s},, gyro_1_s:#{gyro_1_s}, gyro_2_s:#{gyro_2_s}, gyro_3_s:#{gyro_3_s}"}
         freeze
     end

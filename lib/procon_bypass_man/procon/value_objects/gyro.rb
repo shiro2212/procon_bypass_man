@@ -4,8 +4,8 @@ class ProconBypassMan::Procon::Gyro
     attr_accessor :accel_x, :accel_y, :accel_z, :gyro_1, :gyro_2, :gyro_3
   
     def initialize(binary: )
-        hByteBe = binary[13].unpack("C")
-        lByteBe = binary[14].unpack("C")
+        hByteBe = binary[13].unpack("C").first
+        lByteBe = binary[14].unpack("C").first
         uint16 = (lByteBe << 8) | hByteBe
 
         @accel_x = binary[13..14].unpack("S<")

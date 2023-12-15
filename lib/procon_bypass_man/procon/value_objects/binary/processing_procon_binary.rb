@@ -72,6 +72,8 @@ class ProconBypassMan::Domains::ProcessingProconBinary < ProconBypassMan::Domain
   end
 
   def write_as_apply_gyro(gyro: )
-    binary[13..48] = gyro
+    binary[13..24] = gyro
+    binary[25..36] = gyro
+    binary[37..48] = gyro
   end
 end

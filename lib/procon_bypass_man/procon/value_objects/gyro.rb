@@ -14,7 +14,6 @@ class ProconBypassMan::Procon::Gyro
         # S> # [gyro.rb] accel_x:[3581], accel_y:[60415], accel_z:[59919],, gyro_1:[62719], gyro_2:[63487], gyro_3:[512]
         # S* # [gyro.rb] accel_x:[64780], accel_y:[65521], accel_z:[4088],, gyro_1:[65524], gyro_2:[65528], gyro_3:[4]
         ProconBypassMan.logger.debug {"[gyro.rb] accel_x:#{accel_x}, accel_y:#{accel_y}, accel_z:#{accel_z},, gyro_1:#{gyro_1}, gyro_2:#{gyro_2}, gyro_3:#{gyro_3}"}
-        ProconBypassMan.logger.debug {"[gyro.rb] uint16 #{[uint16]}"}
         freeze
     end
     

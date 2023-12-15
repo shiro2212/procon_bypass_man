@@ -65,11 +65,11 @@ class ProconBypassMan::Bypass::ProconToSwitch
         end
 
         gyro = nil
-        if !(external_input_data.nil?)
-          if external_input_data.raw_data.include?(":unzr")
-            gyro = BlueGreenProcess::SharedVariable.instance.data["recent_gyro"][7]
-          end
-        end
+        # if !(external_input_data.nil?)
+        #   if external_input_data.raw_data.include?(":unzr")
+        #     gyro = BlueGreenProcess::SharedVariable.instance.data["recent_gyro"][7]
+        #   end
+        # end
 
         result = measurement.record_write_time do
           begin

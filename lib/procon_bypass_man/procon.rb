@@ -34,7 +34,12 @@ class ProconBypassMan::Procon
     BlueGreenProcess::SharedVariable.instance.data["buttons"] = {}
     BlueGreenProcess::SharedVariable.instance.data["current_layer_key"] = :up
     BlueGreenProcess::SharedVariable.instance.data["recent_left_stick_hypotenuses"] = []
-    BlueGreenProcess::SharedVariable.instance.data["recent_gyro"] = []
+    BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"] = []
+    BlueGreenProcess::SharedVariable.instance.data["recent_accel_y"] = []
+    BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"] = []
+    BlueGreenProcess::SharedVariable.instance.data["recent_gyro_1"] = []
+    BlueGreenProcess::SharedVariable.instance.data["recent_gyro_2"] = []
+    BlueGreenProcess::SharedVariable.instance.data["recent_gyro_3"] = []
   end
   reset!
 
@@ -75,14 +80,44 @@ class ProconBypassMan::Procon
 
   RECENT_GYRO_LIMIT = 10
   def add_recent_gyro(gyro)
-    if (overflowed_size = recent_gyro.size - RECENT_GYRO_LIMIT)
-      overflowed_size.times { recent_gyro.shift }
+    if (overflowed_size = recent_gyro_1.size - RECENT_GYRO_LIMIT)
+      overflowed_size.times { recent_accel_x.shift }
+      overflowed_size.times { recent_accel_y.shift }
+      overflowed_size.times { recent_accel_z.shift }
+      overflowed_size.times { recent_gyro_1.shift }
+      overflowed_size.times { recent_gyro_2.shift }
+      overflowed_size.times { recent_gyro_3.shift }
     end
-    recent_gyro << gyro
+    recent_accel_x << gyro[0]
+    recent_accel_y << gyro[1]
+    recent_accel_z << gyro[2]
+    recent_gyro_1 << gyro[3]
+    recent_gyro_2 << gyro[4]
+    recent_gyro_3 << gyro[5]
   end
 
-  def recent_gyro
-    BlueGreenProcess::SharedVariable.instance.data["recent_gyro"]
+  def recent_accel_x
+    BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"]
+  end
+
+  def recent_accel_y
+    BlueGreenProcess::SharedVariable.instance.data["recent_accel_y"]
+  end
+
+  def recent_accel_z
+    BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"]
+  end
+
+  def recent_gyro_1
+    BlueGreenProcess::SharedVariable.instance.data["recent_gyro_1"]
+  end
+
+  def recent_gyro_2
+    BlueGreenProcess::SharedVariable.instance.data["recent_gyro_2"]
+  end
+
+  def recent_gyro_3
+    BlueGreenProcess::SharedVariable.instance.data["recent_gyro_3"]
   end
 
   def ongoing_macro; @@status[:ongoing_macro]; end

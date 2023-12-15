@@ -65,11 +65,19 @@ class ProconBypassMan::Bypass::ProconToSwitch
         end
 
         gyro = nil
-        # if !(external_input_data.nil?)
-        #   if external_input_data.raw_data.include?(":unzr")
-        #     gyro = BlueGreenProcess::SharedVariable.instance.data["recent_gyro"][7]
-        #   end
-        # end
+        if !(external_input_data.nil?)
+          if external_input_data.raw_data.include?(":unzr")
+            gyro = []
+            frame = 7
+            gyro << BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][frame].pack("H*")
+            gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_accel_y"][frame].pack("H*")
+            gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"][frame].pack("H*")
+            gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_gyro_1"][frame].pack("H*")
+            gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_gyro_2"][frame].pack("H*")
+            gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_gyro_3"][frame].pack("H*")
+            ProconBypassMan.logger.debug {"[SharedVariable] packH: #{gyro}"}
+          end
+        end
 
         result = measurement.record_write_time do
           begin

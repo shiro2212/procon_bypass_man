@@ -78,7 +78,6 @@ class ProconBypassMan::Domains::ProcessingProconBinary < ProconBypassMan::Domain
     gyro_1 = gyro[3]
     gyro_2 = gyro[4]
     gyro_3 = gyro[5]
-    ProconBypassMan.logger.debug {"[binary] start"}
     binary[13] = accel_x[0]
     binary[14] = accel_x[1]
     binary[15] = accel_y[0]
@@ -91,7 +90,7 @@ class ProconBypassMan::Domains::ProcessingProconBinary < ProconBypassMan::Domain
     binary[22] = gyro_2[1]
     binary[23] = gyro_3[0]
     binary[24] = gyro_3[1]
-    ProconBypassMan.logger.debug {"[binary] fin"}
+    return binary
     # binary[13..24] = gyro
     # binary[25..36] = gyro
     # binary[37..48] = gyro

@@ -69,12 +69,12 @@ class ProconBypassMan::Bypass::ProconToSwitch
           if external_input_data.raw_data.include?(":unzr")
             gyro = []
             frame = 7
-            gyro << BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][frame].first.pack("S*")
-            gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_accel_y"][frame].first.pack("S*")
-            gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"][frame].first.pack("S*")
-            gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_gyro_1"][frame].first.pack("S*")
-            gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_gyro_2"][frame].first.pack("S*")
-            gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_gyro_3"][frame].first.pack("S*")
+            gyro << BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][frame].pack("S*")
+            gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_accel_y"][frame].pack("S*")
+            gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"][frame].pack("S*")
+            gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_gyro_1"][frame].pack("S*")
+            gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_gyro_2"][frame].pack("S*")
+            gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_gyro_3"][frame].pack("S*")
             ProconBypassMan.logger.debug {"[SharedVariable] packH: #{gyro}"}
           end
         end

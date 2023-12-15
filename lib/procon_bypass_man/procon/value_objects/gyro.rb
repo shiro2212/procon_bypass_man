@@ -11,7 +11,7 @@ class ProconBypassMan::Procon::Gyro
         @gyro_2 = binary[21..22].unpack("S<")
         @gyro_3 = binary[23..24].unpack("S<")
         ## accel_x:[64821], accel_y:[5], accel_z:[4081],, gyro_1:[65524], gyro_2:[65529], gyro_3:[5]
-        # ProconBypassMan.logger.debug {"[gyro.rb] accel_x:#{accel_x}, accel_y:#{accel_y}, accel_z:#{accel_z},, gyro_1:#{gyro_1}, gyro_2:#{gyro_2}, gyro_3:#{gyro_3}"}
+        ProconBypassMan.logger.debug {"[gyro.rb] accel_x:#{accel_x}, accel_y:#{accel_y}, accel_z:#{accel_z},, gyro_1:#{gyro_1}, gyro_2:#{gyro_2}, gyro_3:#{gyro_3}"}
         freeze
     end
     

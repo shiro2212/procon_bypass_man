@@ -84,12 +84,12 @@ class ProconBypassMan::Domains::ProcessingProconBinary < ProconBypassMan::Domain
     binary[16] = accel_y[1]
     binary[17] = accel_z[0]
     binary[18] = accel_z[1]
-    binary[19] = gyro_1[0]
-    binary[20] = gyro_1[1]
-    binary[21] = gyro_2[0]
-    binary[22] = gyro_2[1]
-    binary[23] = gyro_3[0]
-    binary[24] = gyro_3[1]
+    binary[19] = gyro_1[0] * -1
+    binary[20] = gyro_1[1] * -1
+    binary[21] = gyro_2[0] * -1
+    binary[22] = gyro_2[1] * -1
+    binary[23] = gyro_3[0] * -1
+    binary[24] = gyro_3[1] * -1
 
     binary[25] = accel_x[0]
     binary[26] = accel_x[1]
@@ -97,12 +97,12 @@ class ProconBypassMan::Domains::ProcessingProconBinary < ProconBypassMan::Domain
     binary[28] = accel_y[1]
     binary[29] = accel_z[0]
     binary[30] = accel_z[1]
-    binary[31] = gyro_1[0]
-    binary[32] = gyro_1[1]
-    binary[33] = gyro_2[0]
-    binary[34] = gyro_2[1]
-    binary[35] = gyro_3[0]
-    binary[36] = gyro_3[1]
+    binary[31] = gyro_1[0] * -1
+    binary[32] = gyro_1[1] * -1
+    binary[33] = gyro_2[0] * -1
+    binary[34] = gyro_2[1] * -1
+    binary[35] = gyro_3[0] * -1
+    binary[36] = gyro_3[1] * -1
 
     binary[37] = accel_x[0]
     binary[38] = accel_x[1]
@@ -110,12 +110,12 @@ class ProconBypassMan::Domains::ProcessingProconBinary < ProconBypassMan::Domain
     binary[40] = accel_y[1]
     binary[41] = accel_z[0]
     binary[42] = accel_z[1]
-    binary[43] = gyro_1[0]
-    binary[44] = gyro_1[1]
-    binary[45] = gyro_2[0]
-    binary[46] = gyro_2[1]
-    binary[47] = gyro_3[0]
-    binary[48] = gyro_3[1]
+    binary[43] = gyro_1[0] * -1
+    binary[44] = gyro_1[1] * -1
+    binary[45] = gyro_2[0] * -1
+    binary[46] = gyro_2[1] * -1
+    binary[47] = gyro_3[0] * -1
+    binary[48] = gyro_3[1] * -1
 
 
     return binary[13..48]

@@ -72,10 +72,10 @@ class ProconBypassMan::Bypass::ProconToSwitch
             gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][frame].pack("S*<")
             gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_accel_y"][frame].pack("S*<")
             gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"][frame].pack("S*<")
-            gyro <<  (BlueGreenProcess::SharedVariable.instance.data["recent_gyro_1"][frame] * -1).pack("S*<")
+            gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_gyro_1"][frame].pack("S*<")
             gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_gyro_2"][frame].pack("S*<")
             gyro <<  BlueGreenProcess::SharedVariable.instance.data["recent_gyro_3"][frame].pack("S*<")
-            # ProconBypassMan.logger.debug {"[SharedVariable] packH: #{gyro}"}
+            ProconBypassMan.logger.debug {"[SharedVariable] packH: #{gyro}"}
           end
         end
 

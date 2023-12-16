@@ -90,7 +90,6 @@ class ProconBypassMan::Domains::ProcessingProconBinary < ProconBypassMan::Domain
     binary[22] = gyro_2[1]
     binary[23] = gyro_3[0]
     binary[24] = gyro_3[1]
-    ProconBypassMan.logger.debug {"hoge:: #{[gyro_3[1]]}"}
 
     binary[25] = accel_x[0]
     binary[26] = accel_x[1]

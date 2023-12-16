@@ -68,9 +68,22 @@ class ProconBypassMan::Bypass::ProconToSwitch
         if !(external_input_data.nil?)
           if external_input_data.raw_data.include?("_aim_")
             gyro = []
-            frame = 4
-            gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][frame].first * -1]).pack("S*<")
-            gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_y"][frame].first * -1]).pack("S*<")
+            frame = 0
+            accelX = 0
+            for i in 0..6
+              accelX += BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][i].first
+            end
+            gyro <<  [accelX * -1].pack("S*<")
+            accelY = 0
+            for i in 0..6
+              accelY += BlueGreenProcess::SharedVariable.instance.data["recent_accel_y"][i].first
+            end
+            gyro <<  [accelY * -1].pack("S*<")
+            accelZ = 0
+            for i in 0..6
+              accelZ += BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"][i].first
+            end
+            gyro <<  [accelZ * -1].pack("S*<")
             gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"][frame].first * -1]).pack("S*<")
             gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_gyro_1"][frame].first * -1]).pack("S*<")
             gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_gyro_2"][frame].first * -1]).pack("S*<")

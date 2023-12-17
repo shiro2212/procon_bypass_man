@@ -99,7 +99,7 @@ class ProconBypassMan::Bypass::ProconToSwitch
             for i in 0..6
               gyro3 += BlueGreenProcess::SharedVariable.instance.data["recent_gyro_3"][i].first
             end
-            # gyro <<  [gyro3 * -1].pack("S*<")
+            gyro <<  [gyro3 * -1].pack("S*<")
             # gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_gyro_1"][frame].first * -1]).pack("S*<")
             # gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_gyro_2"][frame].first * -1]).pack("S*<")
             # gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_gyro_3"][frame].first * -1]).pack("S*<")

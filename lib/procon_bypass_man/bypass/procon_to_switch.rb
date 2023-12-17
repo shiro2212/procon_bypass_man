@@ -106,7 +106,7 @@ class ProconBypassMan::Bypass::ProconToSwitch
             # ProconBypassMan.logger.debug {"[SharedVariable] packH: #{gyro}"}
           end
           if external_input_data.raw_data.include?("_fix_")
-            
+            gyro = []
             gyro <<  ([-752]).pack("S*<")
             gyro <<  ([-22]).pack("S*<")
             gyro <<  ([4073]).pack("S*<")

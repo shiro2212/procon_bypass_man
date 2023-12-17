@@ -107,7 +107,7 @@ class ProconBypassMan::Bypass::ProconToSwitch
           end
           if external_input_data.raw_data.include?("_fix_")
             gyro = []
-            gyro <<  ([-752]).pack("S*<")
+            gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"].last.first]).pack("S*<")
             gyro <<  ([-22]).pack("S*<")
             gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"].last.first]).pack("S*<")
             gyro <<  ([0]).pack("S*<")

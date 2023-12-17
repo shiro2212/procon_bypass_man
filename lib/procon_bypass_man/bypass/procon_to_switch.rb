@@ -105,6 +105,15 @@ class ProconBypassMan::Bypass::ProconToSwitch
             # gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_gyro_3"][frame].first * -1]).pack("S*<")
             # ProconBypassMan.logger.debug {"[SharedVariable] packH: #{gyro}"}
           end
+          if external_input_data.raw_data.include?("_fix_")
+            
+            gyro <<  ([-752]).pack("S*<")
+            gyro <<  ([-22]).pack("S*<")
+            gyro <<  ([4073]).pack("S*<")
+            gyro <<  ([0]).pack("S*<")
+            gyro <<  ([0]).pack("S*<")
+            gyro <<  ([0]).pack("S*<")
+          end
         end
 
         result = measurement.record_write_time do

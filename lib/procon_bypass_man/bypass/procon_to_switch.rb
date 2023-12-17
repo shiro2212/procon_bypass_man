@@ -70,45 +70,39 @@ class ProconBypassMan::Bypass::ProconToSwitch
             gyro = []
             frame = BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"].size - 1 
             accelX = 0
-            for i in 0..frame
+            for i in frame..frame
               accelX += BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][i].first
             end
             gyro <<  [accelX * -1].pack("S*<")
             accelY = 0
-            for i in 0..frame
+            for i in frame..frame
               accelY += BlueGreenProcess::SharedVariable.instance.data["recent_accel_y"][i].first
             end
             gyro <<  [accelY * -1].pack("S*<")
             accelZ = 0
-            for i in 0..frame
+            for i in frame..frame
               accelZ += BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"][i].first
             end
             gyro <<  [accelZ * -1].pack("S*<")
 
             gyro1 = 0
-            for i in 0..frame
+            for i in frame..frame
               gyro1 += BlueGreenProcess::SharedVariable.instance.data["recent_gyro_1"][i].first
             end
             gyro <<  [gyro1 * -1].pack("S*<")
             gyro2 = 0
-            for i in 0..frame
+            for i in frame..frame
               gyro2 += BlueGreenProcess::SharedVariable.instance.data["recent_gyro_2"][i].first
             end
             gyro <<  [gyro2 * -1].pack("S*<")
             gyro3 = 0
-            for i in 0..frame
+            for i in frame..frame
               gyro3 += BlueGreenProcess::SharedVariable.instance.data["recent_gyro_3"][i].first
             end
             gyro <<  [gyro3 * -1].pack("S*<")
             # gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_gyro_1"][frame].first * -1]).pack("S*<")
             # gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_gyro_2"][frame].first * -1]).pack("S*<")
             # gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_gyro_3"][frame].first * -1]).pack("S*<")
-            # gyro << [32767].pack("S*<")
-            # gyro << [32767].pack("S*<")
-            # gyro << [32767].pack("S*<")
-            # gyro << [32767].pack("S*<")
-            # gyro << [32767].pack("S*<")
-            # gyro << [32767].pack("S*<")
             # ProconBypassMan.logger.debug {"[SharedVariable] packH: #{gyro}"}
           end
         end

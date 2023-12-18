@@ -88,21 +88,24 @@ class ProconBypassMan::Bypass::ProconToSwitch
 
           if start
             gyro = []
-            accelX = 0
-            for i in start..latest
-              accelX += BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][i].first
-            end
-            gyro <<  [accelX * -1].pack("S*<")
-            accelY = 0
-            for i in start..latest
-              accelY += BlueGreenProcess::SharedVariable.instance.data["recent_accel_y"][i].first
-            end
-            gyro <<  [accelY * -1].pack("S*<")
-            accelZ = 0
-            for i in start..latest
-              accelZ += BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"][i].first
-            end
-            gyro <<  [accelZ * -1].pack("S*<")
+            gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][start].first]).pack("S*<")
+            gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_y"][start].first]).pack("S*<")
+            gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"][start].first]).pack("S*<")
+            # accelX = 0
+            # for i in start..latest
+            #   accelX += BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][i].first
+            # end
+            # gyro <<  [accelX * -1].pack("S*<")
+            # accelY = 0
+            # for i in start..latest
+            #   accelY += BlueGreenProcess::SharedVariable.instance.data["recent_accel_y"][i].first
+            # end
+            # gyro <<  [accelY * -1].pack("S*<")
+            # accelZ = 0
+            # for i in start..latest
+            #   accelZ += BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"][i].first
+            # end
+            # gyro <<  [accelZ * -1].pack("S*<")
 
             gyro1 = 0
             for i in start..latest

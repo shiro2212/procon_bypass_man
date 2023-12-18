@@ -84,6 +84,7 @@ class ProconBypassMan::Bypass::ProconToSwitch
             start = 2
           elsif external_input_data.raw_data.include?("_aim6_")
             start = 1
+          end
 
           if start
             gyro = []

@@ -113,6 +113,7 @@ class ProconBypassMan::DeviceConnection::Executer
     end
   rescue ProconBypassMan::SafeTimeout::Timeout, Timeout::Error => e
     ProconBypassMan.logger.error "timeoutになりました(#{e.message})"
+    procon.write_nonblock(['8006'].pack("H*")) # 再実行時のケーブルの再接続を不要にするワークアラウンド. リセットしているらしい
     compressed_buffer_text = ProconBypassMan::CompressArray.new(debug_log_buffer).compress.join("\n")
     ProconBypassMan::SendErrorCommand.execute(error: compressed_buffer_text, stdout: false)
     raise ProconBypassMan::SafeTimeout::Timeout if @throw_error_if_timeout
@@ -149,14 +150,21 @@ class ProconBypassMan::DeviceConnection::Executer
     @procon
   end
 
+  GADGET_PATH = '/dev/hidg0'
   def init_devices
+    unless SudoNeedPasswordChecker.execute!
+      raise ProconBypassMan::DeviceConnection::SetupIncompleteError
+    end
+
     if @initialized_devices
       return
     end
+
     ProconBypassMan::UsbDeviceController.init
     ProconBypassMan::UsbDeviceController.reset
 
     if path = ProconBypassMan::DeviceProconFinder.find
+      ShellRunner.execute("sudo chmod 777 #{path}")
       @procon = File.open(path, "w+b")
       ProconBypassMan.logger.info "proconのデバイスファイルは#{path}を使います"
     else
@@ -164,7 +172,8 @@ class ProconBypassMan::DeviceConnection::Executer
     end
 
     begin
-      @gadget = File.open('/dev/hidg0', "w+b")
+      ShellRunner.execute("sudo chmod 777 #{GADGET_PATH}")
+      @gadget = File.open(GADGET_PATH, "w+b")
     rescue Errno::ENXIO => e
       # /dev/hidg0 をopenできないときがある
       ProconBypassMan::SendErrorCommand.execute(error: "Errno::ENXIOが起きたのでresetします.\n #{e.full_message}", stdout: false)

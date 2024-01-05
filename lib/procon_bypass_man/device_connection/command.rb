@@ -5,7 +5,7 @@ class ProconBypassMan::DeviceConnection::Command
   def self.execute!(retry_count: 0)
     begin
       gadget, procon = ProconBypassMan::DeviceConnection::Executer.execute!
-    rescue ProconBypassMan::DeviceConnection::TimeoutErrorInConditionalRoute
+    rescue ProconBypassMan::DeviceConnection::TimeoutErrorInConditionalRoute, ProconBypassMan::SafeTimeout::Timeout
       if retry_count >= MAX_RETRY_COUNT
         ProconBypassMan::SendErrorCommand.execute(error: "リトライしましたが、接続できませんでした")
         raise ProconBypassMan::DeviceConnection::TimeoutError
@@ -15,10 +15,8 @@ class ProconBypassMan::DeviceConnection::Command
 
       retry_count = retry_count + 1
       retry
-    rescue ProconBypassMan::DeviceConnection::NotFoundProconError => e
+    rescue ProconBypassMan::DeviceConnection::NotFoundProconError, ProconBypassMan::DeviceConnection::SetupIncompleteError => e
       raise
-    rescue ProconBypassMan::SafeTimeout::Timeout
-      raise ProconBypassMan::DeviceConnection::TimeoutError
     end
 
     ProconBypassMan::DeviceConnection::PreBypass.new(gadget: gadget, procon: procon).execute!

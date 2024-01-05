@@ -1,3 +1,13 @@
+## unrelease
+* sudoをつけずにPBMを起動できるようになりました
+
+## [0.3.11] 2023-12-13
+* 起動時の安定性向上
+* systemd unit pbm.serviceをRestart=noにしました
+
+## [0.3.10] 2023-11-30
+* マクロを実行するとメモリ使用率が増え続ける不具合を修正しました
+
 ## [0.3.9] 2023-07-15
 * Lボタンを押すだけで簡単スニーキング(スプラ3)ができるようになりました
   * 例: `left_analog_stick_cap cap: 1100, if_pressed: [:l], combined_press_is_pressed: [:zl], force_neutral: [:l]`

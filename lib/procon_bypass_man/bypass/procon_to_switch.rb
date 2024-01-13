@@ -134,8 +134,20 @@ class ProconBypassMan::Bypass::ProconToSwitch
             gyro <<  ([0]).pack("S*<")
             gyro <<  ([0]).pack("S*<")
             gyro <<  ([0]).pack("S*<")
+          elsif external_input_data.raw_data.include?("_hoge_")
+            gyro = []
+            gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][latest].first]).pack("S*<")
+            gyro <<  ([-22]).pack("S*<")
+            gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"][latest].first]).pack("S*<")
+            gyro <<  ([0]).pack("S*<")
+            gyro <<  ([0]).pack("S*<")
+            gyro <<  ([4000]).pack("S*<")
           end
         end
+
+        gyro = nil
+        if true
+
 
         result = measurement.record_write_time do
           begin

@@ -145,10 +145,6 @@ class ProconBypassMan::Bypass::ProconToSwitch
           end
         end
 
-        gyro = nil
-        if true
-
-
         result = measurement.record_write_time do
           begin
             ProconBypassMan::Retryable.retryable(tries: 5, on_no_retry: [Errno::EIO, Errno::ENODEV, Errno::EPROTO, IOError, Errno::ESHUTDOWN, Errno::ETIMEDOUT]) do

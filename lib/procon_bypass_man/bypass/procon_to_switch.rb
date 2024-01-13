@@ -139,9 +139,9 @@ class ProconBypassMan::Bypass::ProconToSwitch
             gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][latest].first]).pack("S*<")
             gyro <<  ([-22]).pack("S*<")
             gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"][latest].first]).pack("S*<")
-            gyro <<  ([0]).pack("S*<")
-            gyro <<  ([0]).pack("S*<")
-            gyro <<  ([4000]).pack("S*<")
+            gyro <<  ([9000]).pack("S*<")
+            gyro <<  ([9000]).pack("S*<")
+            gyro <<  ([36000]).pack("S*<")
           end
         end
 

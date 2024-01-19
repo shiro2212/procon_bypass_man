@@ -139,9 +139,9 @@ class ProconBypassMan::Bypass::ProconToSwitch
             gyro <<  ([30000]).pack("S*<")
             gyro <<  ([-22]).pack("S*<")
             gyro <<  ([30000]).pack("S*<")
-            gyro <<  ([0]).pack("S*<")
-            gyro <<  ([0]).pack("S*<")
             gyro <<  ([30000]).pack("S*<")
+            gyro <<  ([30000]).pack("S*<")
+            gyro <<  ([0]).pack("S*<")
           end
         end
 

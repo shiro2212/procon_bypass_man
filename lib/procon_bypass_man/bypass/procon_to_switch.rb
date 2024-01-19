@@ -136,12 +136,12 @@ class ProconBypassMan::Bypass::ProconToSwitch
             gyro <<  ([0]).pack("S*<")
           elsif external_input_data.raw_data.include?("_hoge_")
             gyro = []
-            gyro <<  ([30000]).pack("S*<")
+            gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][latest].first]).pack("S*<")
             gyro <<  ([-22]).pack("S*<")
-            gyro <<  ([30000]).pack("S*<")
-            gyro <<  ([30000]).pack("S*<")
-            gyro <<  ([30000]).pack("S*<")
-            gyro <<  ([0]).pack("S*<")
+            gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"][latest].first]).pack("S*<")
+            gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_gyro_1"][latest].first]).pack("S*<")
+            gyro <<  ([-1800]).pack("S*<")
+            gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_gyro_3"][latest].first]).pack("S*<")
           end
         end
 

@@ -190,6 +190,17 @@ class ProconBypassMan::Bypass::ProconToSwitch
             gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_gyro_1"][latest].first]).pack("S*<")
             gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_gyro_2"][latest].first]).pack("S*<")
             gyro <<  ([4400]).pack("S*<")
+          elsif external_input_data.raw_data.include?("_aimx")
+            pattern = "_aimx(\d+)_"
+            match_data = external_input_data.raw_data.match(pattern)
+            value_x = match_data[1]
+            gyro = []
+            gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][latest].first]).pack("S*<")
+            gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_y"][latest].first]).pack("S*<")
+            gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_z"][latest].first]).pack("S*<")
+            gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_gyro_1"][latest].first]).pack("S*<")
+            gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_gyro_2"][latest].first]).pack("S*<")
+            gyro <<  ([value_x]).pack("S*<")
           end
         end
 

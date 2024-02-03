@@ -193,6 +193,7 @@ class ProconBypassMan::Bypass::ProconToSwitch
           elsif external_input_data.raw_data.include?("_aimx")
             pattern = "_aimx(-?\d+)(\.\d+)?_"
             match_data = external_input_data.raw_data.match(pattern)
+            ProconBypassMan.logger.debug { "<<< #{match_data[1]}" }
             value_x = match_data[1]
             gyro = []
             gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][latest].first]).pack("S*<")

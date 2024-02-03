@@ -195,7 +195,7 @@ class ProconBypassMan::Bypass::ProconToSwitch
             match_data = external_input_data.raw_data.match(pattern)
             if !match_data.nil?
               ProconBypassMan.logger.debug { match_data[1] }
-              value_x = match_data[1]
+              value_x = match_data[1].to_i
               gyro = []
               gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_x"][latest].first]).pack("S*<")
               gyro <<  ([BlueGreenProcess::SharedVariable.instance.data["recent_accel_y"][latest].first]).pack("S*<")

@@ -30,6 +30,8 @@ class ProconBypassMan::Procon::MacroBuilder
           :toggle
         elsif value.start_with?("shake_left_stick")
           :shake_left_stick
+        elsif value.start_with?("shake_right_stick")
+          :shake_right_stick
         else
           :pressing
         end
@@ -43,6 +45,8 @@ class ProconBypassMan::Procon::MacroBuilder
         [@button.to_sym, @button.to_sym]
       when :shake_left_stick
         [:tilt_left_stick_completely_to_left, :tilt_left_stick_completely_to_right]
+      when :shake_right_stick
+        [:tilt_right_stick_completely_to_up, :tilt_right_stick_completely_to_down]
       end
     end
   end
@@ -198,27 +202,27 @@ class ProconBypassMan::Procon::MacroBuilder
       return { steps: roll_left_stick_steps }
     end
 
-    if %r!^(pressing_|toggle_|shake_left_stick_)! =~ step && (subjects = step.scan(%r!pressing_[^_]+|shake_left_stick|toggle_[^_]+!)) && (match = step.match(%r!_for_([\d_]+)(sec)?\z!))
+    if %r!^(pressing_|toggle_|shake_left_stick_|shake_right_stick_)! =~ step && (subjects = step.scan(%r!pressing_[^_]+|shake_left_stick|shake_right_stick|toggle_[^_]+!)) && (match = step.match(%r!_for_([\d_]+)(sec)?\z!))
       if sec = match[1]
         return {
           continue_for: to_f(sec),
           steps: SubjectMerger.merge(subjects.map { |x| Subject.new(x) }).select { |x|
             if x.is_a?(Array)
-              x.select { |y| is_button(y) || RESERVED_WORD_NONE == y }
+              x.select { |y| is_button(y) || RESERVED_WORD_NONE == y || is_stick_step(y) }
             else
-              is_button(x) || RESERVED_WORD_NONE == x || :tilt_left_stick_completely_to_left == x || :tilt_left_stick_completely_to_right == x
+              is_button(x) || RESERVED_WORD_NONE == x || is_stick_step(x)
             end
           },
         }
       end
     end
 
-    if %r!^(pressing_|toggle_|shake_left_stick_)! =~ step && (subjects = step.scan(%r!pressing_[^_]+|shake_left_stick|toggle_[^_]+!))
+    if %r!^(pressing_|toggle_|shake_left_stick_|shake_right_stick_)! =~ step && (subjects = step.scan(%r!pressing_[^_]+|shake_left_stick|shake_right_stick|toggle_[^_]+!))
       return SubjectMerger.merge(subjects.map { |x| Subject.new(x) }).select { |x|
         if x.is_a?(Array)
-          x.select { |y| is_button(y) || RESERVED_WORD_NONE == y }
+          x.select { |y| is_button(y) || RESERVED_WORD_NONE == y || is_stick_step(y) }
         else
-          is_button(x) || RESERVED_WORD_NONE == x
+          is_button(x) || RESERVED_WORD_NONE == x || is_stick_step(x)
         end
       }
     end
@@ -227,6 +231,10 @@ class ProconBypassMan::Procon::MacroBuilder
   # @return [Boolean]
   def is_button(step)
     !!ProconBypassMan::Procon::ButtonCollection::BUTTONS_MAP[step.to_sym]
+  end
+
+  def is_stick_step(step)
+    !!(step.to_s =~ /\Atilt_(left|right)_stick_/)
   end
 
   def to_f(value)

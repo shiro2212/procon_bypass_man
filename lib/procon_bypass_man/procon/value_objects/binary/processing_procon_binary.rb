@@ -46,9 +46,17 @@ class ProconBypassMan::Domains::ProcessingProconBinary < ProconBypassMan::Domain
   end
 
   # @param [Symbol] stick method
-  def write_as_tilt_left_stick(step)
-    binary[6..8] = ProconBypassMan::Procon::AnalogStickManipulator.new(binary, method: step).to_binary
+  def write_as_tilt_stick(step)
+    byte_position =
+      if step =~ /tilt_right_stick_/
+        ProconBypassMan::Procon::ButtonCollection::RIGHT_ANALOG_STICK.fetch(:byte_position)
+      else
+        ProconBypassMan::Procon::ButtonCollection::LEFT_ANALOG_STICK.fetch(:byte_position)
+      end
+    binary[byte_position] = ProconBypassMan::Procon::AnalogStickManipulator.new(binary, method: step).to_binary
   end
+
+  alias write_as_tilt_left_stick write_as_tilt_stick
 
   # @param [Symbol] button
   def write_as_unpress_button(button)

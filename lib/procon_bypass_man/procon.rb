@@ -29,6 +29,7 @@ class ProconBypassMan::Procon
     @@status = {
       ongoing_macro: MacroRegistry.load(:null),
       ongoing_mode: ModeRegistry.load(:manual), # 削除予定
+      macro_cooldowns: Hash.new(0),
     }
     BlueGreenProcess::SharedVariable.instance.data["buttons"] = {}
     BlueGreenProcess::SharedVariable.instance.data["current_layer_key"] = :up
@@ -58,6 +59,7 @@ class ProconBypassMan::Procon
     BlueGreenProcess::SharedVariable.instance.data["current_layer_key"] = layer
   end
 
+  MACRO_COOLDOWN_FRAMES = 30
   RECENT_LEFT_STICK_POSITIONS_LIMIT = 5
   # @param [Float] left_stick_hypotenuses
   # @return [void]
@@ -74,9 +76,25 @@ class ProconBypassMan::Procon
 
   def ongoing_macro; @@status[:ongoing_macro]; end
   def ongoing_mode; @@status[:ongoing_mode]; end
+  def macro_cooldowns; @@status[:macro_cooldowns]; end
 
   def current_layer
     ProconBypassMan::ButtonsSettingConfiguration.instance.layers[current_layer_key]
+  end
+
+  def tick_macro_cooldowns!
+    macro_cooldowns.each_key do |macro_name|
+      macro_cooldowns[macro_name] -= 1 if macro_cooldowns[macro_name].positive?
+    end
+  end
+
+  def macro_cooling_down?(macro_name)
+    macro_cooldowns[macro_name].positive?
+  end
+
+  def start_macro!(macro_name, force_neutral_buttons:, context: {})
+    @@status[:ongoing_macro] = MacroRegistry.load(macro_name, force_neutral_buttons: force_neutral_buttons, context: context)
+    macro_cooldowns[macro_name] = MACRO_COOLDOWN_FRAMES
   end
 
   # 内部ステータスを書き換えるフェーズ
@@ -103,6 +121,8 @@ class ProconBypassMan::Procon
     add_recent_left_stick_hypotenuses(analog_stick.relative_hypotenuse)
     dumped_tilting_power = @left_stick_tilting_power_scaler.calculate(recent_left_stick_hypotenuses)
 
+    tick_macro_cooldowns!
+
     enable_all_macro = true
     enable_macro_map = Hash.new {|h,k| h[k] = true }
     current_layer.disable_macros.each do |disable_macro|
@@ -118,6 +138,7 @@ class ProconBypassMan::Procon
     if ongoing_macro.finished? && enable_all_macro
       current_layer.macros.each do |macro_name, options|
         next unless enable_macro_map[macro_name]
+        next if macro_cooling_down?(macro_name)
 
         if(if_tilted_left_stick_value = options[:if_tilted_left_stick])
           threshold = (if_tilted_left_stick_value.is_a?(Hash) && if_tilted_left_stick_value[:threshold])
@@ -133,7 +154,7 @@ class ProconBypassMan::Procon
           end
           isPressButton = user_operation.pressing_all_buttons?(options[:if_pressed])
           if isTilt && isPressButton && isAngleRange
-            @@status[:ongoing_macro] = MacroRegistry.load(macro_name, force_neutral_buttons: options[:force_neutral], context: analog_stick_context)
+            start_macro!(macro_name, force_neutral_buttons: options[:force_neutral], context: analog_stick_context)
             break
           end
 
@@ -141,7 +162,7 @@ class ProconBypassMan::Procon
         end
 
         if user_operation.pressing_all_buttons?(options[:if_pressed])
-          @@status[:ongoing_macro] = MacroRegistry.load(macro_name, force_neutral_buttons: options[:force_neutral], context: analog_stick_context)
+          start_macro!(macro_name, force_neutral_buttons: options[:force_neutral], context: analog_stick_context)
           break
         end
       end

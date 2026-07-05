@@ -226,6 +226,47 @@ describe ProconBypassMan::Procon::MacroBuilder do
         end
       end
 
+      describe 'dynamic_ikarole' do
+        it 'uses the left stick degree from context' do
+          expect(described_class.new([:dynamic_ikarole], context: { left_stick_degree: 60 }).build).to eq([
+            { steps: [
+              [:tilt_left_stick_completely_to_30deg],
+              [:tilt_left_stick_completely_to_30deg],
+              [:tilt_left_stick_completely_to_30deg],
+              [:tilt_left_stick_completely_to_30deg],
+              [:tilt_left_stick_completely_to_90deg, :b],
+            ]}
+          ])
+        end
+
+        it 'normalizes negative degrees' do
+          expect(described_class.new([:dynamic_ikarole], context: { left_stick_degree: 0 }).build).to eq([
+            { steps: [
+              [:tilt_left_stick_completely_to_330deg],
+              [:tilt_left_stick_completely_to_330deg],
+              [:tilt_left_stick_completely_to_330deg],
+              [:tilt_left_stick_completely_to_330deg],
+              [:tilt_left_stick_completely_to_30deg, :b],
+            ]}
+          ])
+        end
+
+
+        it 'uses offset when end degree is not configured' do
+          stub_const('ProconBypassMan::Procon::MacroBuilder::DYNAMIC_IKAROLE_END_DEGREE', nil)
+
+          expect(described_class.new([:dynamic_ikarole], context: { left_stick_degree: 60 }).build).to eq([
+            { steps: [
+              [:tilt_left_stick_completely_to_30deg],
+              [:tilt_left_stick_completely_to_30deg],
+              [:tilt_left_stick_completely_to_30deg],
+              [:tilt_left_stick_completely_to_30deg],
+              [:tilt_left_stick_completely_to_90deg, :b],
+            ]}
+          ])
+        end
+      end
+
       describe 'shake_left_stick' do
         it do
           expect(described_class.new([:shake_left_stick_for_0_65sec]).build).to eq([

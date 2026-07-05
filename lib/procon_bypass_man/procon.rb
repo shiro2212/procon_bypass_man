@@ -59,7 +59,7 @@ class ProconBypassMan::Procon
     BlueGreenProcess::SharedVariable.instance.data["current_layer_key"] = layer
   end
 
-  MACRO_COOLDOWN_FRAMES = 30
+  DYNAMIC_IKAROLE_MACRO_COOLDOWN_FRAMES = 10
   RECENT_LEFT_STICK_POSITIONS_LIMIT = 5
   # @param [Float] left_stick_hypotenuses
   # @return [void]
@@ -94,7 +94,9 @@ class ProconBypassMan::Procon
 
   def start_macro!(macro_name, force_neutral_buttons:, context: {})
     @@status[:ongoing_macro] = MacroRegistry.load(macro_name, force_neutral_buttons: force_neutral_buttons, context: context)
-    macro_cooldowns[macro_name] = MACRO_COOLDOWN_FRAMES
+    if MacroRegistry.dynamic_ikarole?(macro_name)
+      macro_cooldowns[macro_name] = DYNAMIC_IKAROLE_MACRO_COOLDOWN_FRAMES
+    end
   end
 
   # 内部ステータスを書き換えるフェーズ

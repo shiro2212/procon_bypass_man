@@ -11,16 +11,16 @@ class ProconBypassMan::Procon::AnalogStickManipulator
 
     if method =~ /tilt_(left|right)_stick_(completely)_to_(left|right|up|down)/
       direction = $3
+      neutral_position = ProconBypassMan::ButtonsSettingConfiguration.instance.neutral_position
+      syahen = 1800 # 最大まで傾けた状態
 
       case direction
       when 'left'
-        self.manipulated_abs_x = 400
-        # yを引き継ぐとタンサンボムの溜まりが悪くなったので固定値を入れる
-        self.manipulated_abs_y = analog_stick.abs_y
-        # self.manipulated_abs_y = 1808
+        self.manipulated_abs_x = neutral_position.x - syahen
+        self.manipulated_abs_y = neutral_position.y
       when 'right'
-        self.manipulated_abs_x = 3400
-        self.manipulated_abs_y = 1808
+        self.manipulated_abs_x = neutral_position.x + syahen
+        self.manipulated_abs_y = neutral_position.y
       when 'up'
         self.manipulated_abs_x = analog_stick.abs_x
         self.manipulated_abs_y = 3400

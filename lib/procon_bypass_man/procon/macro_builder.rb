@@ -126,7 +126,7 @@ class ProconBypassMan::Procon::MacroBuilder
       )
       start_step = :"tilt_left_stick_completely_to_#{start_degree}deg"
       end_step = :"tilt_left_stick_completely_to_#{end_degree}deg"
-      return { steps: Array.new(DYNAMIC_IKAROLE_HOLD_FRAMES) { [start_step] } + [[end_step, :b]] }
+      return { steps: Array.new(DYNAMIC_IKAROLE_HOLD_FRAMES) { [start_step] } + [[end_step, :b], [end_step, :b]] }
     end
 
     if /^forward_ikarole_r/ =~ step

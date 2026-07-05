@@ -230,11 +230,11 @@ describe ProconBypassMan::Procon::MacroBuilder do
         it 'uses the left stick degree from context' do
           expect(described_class.new([:dynamic_ikarole], context: { left_stick_degree: 60 }).build).to eq([
             { steps: [
-              [:tilt_left_stick_completely_to_30deg],
-              [:tilt_left_stick_completely_to_30deg],
-              [:tilt_left_stick_completely_to_30deg],
-              [:tilt_left_stick_completely_to_30deg],
-              [:tilt_left_stick_completely_to_90deg, :b],
+              [:tilt_left_stick_completely_to_350deg],
+              [:tilt_left_stick_completely_to_350deg],
+              [:tilt_left_stick_completely_to_350deg],
+              [:tilt_left_stick_completely_to_350deg],
+              [:tilt_left_stick_completely_to_130deg, :b],
             ]}
           ])
         end
@@ -242,11 +242,11 @@ describe ProconBypassMan::Procon::MacroBuilder do
         it 'normalizes negative degrees' do
           expect(described_class.new([:dynamic_ikarole], context: { left_stick_degree: 0 }).build).to eq([
             { steps: [
-              [:tilt_left_stick_completely_to_330deg],
-              [:tilt_left_stick_completely_to_330deg],
-              [:tilt_left_stick_completely_to_330deg],
-              [:tilt_left_stick_completely_to_330deg],
-              [:tilt_left_stick_completely_to_30deg, :b],
+              [:tilt_left_stick_completely_to_290deg],
+              [:tilt_left_stick_completely_to_290deg],
+              [:tilt_left_stick_completely_to_290deg],
+              [:tilt_left_stick_completely_to_290deg],
+              [:tilt_left_stick_completely_to_70deg, :b],
             ]}
           ])
         end
@@ -257,11 +257,11 @@ describe ProconBypassMan::Procon::MacroBuilder do
 
           expect(described_class.new([:dynamic_ikarole], context: { left_stick_degree: 60 }).build).to eq([
             { steps: [
-              [:tilt_left_stick_completely_to_30deg],
-              [:tilt_left_stick_completely_to_30deg],
-              [:tilt_left_stick_completely_to_30deg],
-              [:tilt_left_stick_completely_to_30deg],
-              [:tilt_left_stick_completely_to_90deg, :b],
+              [:tilt_left_stick_completely_to_350deg],
+              [:tilt_left_stick_completely_to_350deg],
+              [:tilt_left_stick_completely_to_350deg],
+              [:tilt_left_stick_completely_to_350deg],
+              [:tilt_left_stick_completely_to_50deg, :b],
             ]}
           ])
         end

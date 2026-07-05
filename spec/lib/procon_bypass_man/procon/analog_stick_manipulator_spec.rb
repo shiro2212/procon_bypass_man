@@ -30,20 +30,20 @@ describe ProconBypassMan::Procon::AnalogStickManipulator do
 
     it do
       manipulator = ProconBypassMan::Procon::AnalogStickManipulator.new(binary, method: :tilt_left_stick_completely_to_90deg)
-      expect(manipulator.manipulated_abs_x).to eq(-2124)
-      expect(manipulator.manipulated_abs_y).to eq(-8)
+      expect(manipulator.manipulated_abs_x).to eq(2124)
+      expect(manipulator.manipulated_abs_y).to eq(3608)
     end
 
     it do
       manipulator = ProconBypassMan::Procon::AnalogStickManipulator.new(binary, method: :tilt_left_stick_completely_to_0deg)
-      expect(manipulator.manipulated_abs_x).to eq(-324)
-      expect(manipulator.manipulated_abs_y).to eq(-1808)
+      expect(manipulator.manipulated_abs_x).to eq(3924)
+      expect(manipulator.manipulated_abs_y).to eq(1808)
     end
 
     it do
       manipulator = ProconBypassMan::Procon::AnalogStickManipulator.new(binary, method: :tilt_left_stick_completely_to_10deg)
-      expect(manipulator.manipulated_abs_x).to eq(-352)
-      expect(manipulator.manipulated_abs_y).to eq(-1496)
+      expect(manipulator.manipulated_abs_x).to eq(3896)
+      expect(manipulator.manipulated_abs_y).to eq(2120)
     end
   end
 end

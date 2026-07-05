@@ -11,9 +11,11 @@ class ProconBypassMan::Procon::MacroRegistry
       return
     end
 
+    source_steps = steps || klass.steps
+    dynamic_ikarole_macro_names[[klass.to_s.to_sym, macro_type]] = source_steps.any? { |step| step.to_s =~ /\Adynamic_ikarole/ }
     plugins.store(
       [klass.to_s.to_sym, macro_type], ->(context: {}){
-        ProconBypassMan::Procon::MacroBuilder.new(steps || klass.steps, context: context).build
+        ProconBypassMan::Procon::MacroBuilder.new(source_steps, context: context).build
       }
     )
   end
@@ -28,7 +30,16 @@ class ProconBypassMan::Procon::MacroRegistry
     end
   end
 
+  def self.dynamic_ikarole?(name, macro_type: :normal)
+    !!dynamic_ikarole_macro_names[[name.to_s.to_sym, macro_type]]
+  end
+
+  def self.dynamic_ikarole_macro_names
+    @dynamic_ikarole_macro_names ||= {}
+  end
+
   def self.reset!
+    @dynamic_ikarole_macro_names = {}
     ProconBypassMan::ButtonsSettingConfiguration.instance.macro_plugins = ProconBypassMan::Procon::MacroPluginMap.new
   end
 
@@ -40,6 +51,7 @@ class ProconBypassMan::Procon::MacroRegistry
     remote_keys = ProconBypassMan::Procon::MacroRegistry.plugins.original_keys.select { |_, y| y == :remote }
     remote_keys.each do |remote_key|
       ProconBypassMan::Procon::MacroRegistry.plugins.delete(remote_key)
+      dynamic_ikarole_macro_names.delete(remote_key)
     end
     ProconBypassMan::Procon::MacroRegistry.plugins
   end

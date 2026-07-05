@@ -277,30 +277,41 @@ describe ProconBypassMan::Procon::MacroBuilder do
           ])
         end
 
+        it 'derives the start degree from the end degree' do
+          stub_const('ProconBypassMan::Procon::MacroBuilder::DYNAMIC_IKAROLE_END_DEGREE', -20)
+
+          expect(described_class.new([:dynamic_ikarole], context: { left_stick_degree: 0 }).build.first[:steps]).to start_with(
+            [:tilt_left_stick_completely_to_70deg]
+          )
+          expect(described_class.new([:dynamic_ikarole], context: { left_stick_degree: 0 }).build.first[:steps].last).to eq(
+            [:tilt_left_stick_completely_to_340deg, :b]
+          )
+        end
+
 
         it 'uses offset when end degree is not configured' do
           stub_const('ProconBypassMan::Procon::MacroBuilder::DYNAMIC_IKAROLE_END_DEGREE', nil)
 
           expect(described_class.new([:dynamic_ikarole], context: { left_stick_degree: 60 }).build).to eq([
             { steps: [
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_200deg, :b],
-              [:tilt_left_stick_completely_to_200deg, :b],
+              [:tilt_left_stick_completely_to_210deg],
+              [:tilt_left_stick_completely_to_210deg],
+              [:tilt_left_stick_completely_to_210deg],
+              [:tilt_left_stick_completely_to_210deg],
+              [:tilt_left_stick_completely_to_210deg],
+              [:tilt_left_stick_completely_to_210deg],
+              [:tilt_left_stick_completely_to_210deg],
+              [:tilt_left_stick_completely_to_210deg],
+              [:tilt_left_stick_completely_to_210deg],
+              [:tilt_left_stick_completely_to_210deg],
+              [:tilt_left_stick_completely_to_210deg],
+              [:tilt_left_stick_completely_to_210deg],
+              [:tilt_left_stick_completely_to_210deg],
+              [:tilt_left_stick_completely_to_210deg],
+              [:tilt_left_stick_completely_to_210deg],
+              [:tilt_left_stick_completely_to_210deg],
+              [:tilt_left_stick_completely_to_120deg, :b],
+              [:tilt_left_stick_completely_to_120deg, :b],
             ]}
           ])
         end

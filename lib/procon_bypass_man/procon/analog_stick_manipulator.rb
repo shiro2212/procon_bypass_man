@@ -36,8 +36,8 @@ class ProconBypassMan::Procon::AnalogStickManipulator
       arc_degree = $2.to_i
       syahen = 1800 # 最大まで傾けた状態
       neutral_position = ProconBypassMan::ButtonsSettingConfiguration.instance.neutral_position
-      self.manipulated_abs_x = (syahen * Math.cos(arc_degree * Math::PI / 180)).to_i - neutral_position.x
-      self.manipulated_abs_y = (syahen * Math.sin(arc_degree * Math::PI / 180)).to_i - neutral_position.y
+      self.manipulated_abs_x = neutral_position.x + (syahen * Math.cos(arc_degree * Math::PI / 180)).to_i
+      self.manipulated_abs_y = neutral_position.y + (syahen * Math.sin(arc_degree * Math::PI / 180)).to_i
       return
     end
 

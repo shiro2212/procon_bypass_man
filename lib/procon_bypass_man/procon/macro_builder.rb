@@ -55,9 +55,14 @@ class ProconBypassMan::Procon::MacroBuilder
   RESERVED_WORDS = {
     RESERVED_WORD_NONE => true,
   }
+  DYNAMIC_IKAROLE_START_DEGREE = -30
+  DYNAMIC_IKAROLE_END_DEGREE = 30
+  DYNAMIC_IKAROLE_OFFSET_DEGREE = 60
+  DYNAMIC_IKAROLE_HOLD_FRAMES = 4
 
-  def initialize(steps)
+  def initialize(steps, context: {})
     @steps = steps.map(&:to_s)
+    @context = context
   end
 
   # @return [Arary<Symbol>]
@@ -107,6 +112,21 @@ class ProconBypassMan::Procon::MacroBuilder
         [:tilt_left_stick_completely_to_90deg],
       ]
       return { steps: for_forward_ikarole_steps }
+    end
+
+    if /^dynamic_ikarole/ =~ step
+      current_degree = @context[:left_stick_degree] || 0
+      start_degree = normalize_degree(current_degree + DYNAMIC_IKAROLE_START_DEGREE)
+      end_degree = normalize_degree(
+        if DYNAMIC_IKAROLE_END_DEGREE
+          current_degree + DYNAMIC_IKAROLE_END_DEGREE
+        else
+          start_degree + DYNAMIC_IKAROLE_OFFSET_DEGREE
+        end
+      )
+      start_step = :"tilt_left_stick_completely_to_#{start_degree}deg"
+      end_step = :"tilt_left_stick_completely_to_#{end_degree}deg"
+      return { steps: Array.new(DYNAMIC_IKAROLE_HOLD_FRAMES) { [start_step] } + [[end_step, :b]] }
     end
 
     if /^forward_ikarole_r/ =~ step
@@ -243,5 +263,9 @@ class ProconBypassMan::Procon::MacroBuilder
     else
       value.to_f
     end
+  end
+
+  def normalize_degree(degree)
+    degree.round % 360
   end
 end

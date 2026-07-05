@@ -23,7 +23,7 @@ class ProconBypassMan::Procon
   require "procon_bypass_man/procon/suppress_rumble"
   require "procon_bypass_man/procon/rumbler"
 
-  attr_accessor :user_operation
+  attr_accessor :user_operation, :raw_input_binary
 
   def self.reset!
     @@status = {
@@ -38,6 +38,7 @@ class ProconBypassMan::Procon
 
   # @param [string] binary
   def initialize(binary)
+    self.raw_input_binary = binary.dup
     self.user_operation = ProconBypassMan::Procon::UserOperation.new(
       binary.dup
     )
@@ -90,7 +91,7 @@ class ProconBypassMan::Procon
       return
     end
 
-    analog_stick = ProconBypassMan::Procon::AnalogStick.new(binary: user_operation.binary.raw)
+    analog_stick = ProconBypassMan::Procon::AnalogStick.new(binary: raw_input_binary)
     add_recent_left_stick_hypotenuses(analog_stick.relative_hypotenuse)
     dumped_tilting_power = @left_stick_tilting_power_scaler.calculate(recent_left_stick_hypotenuses)
 

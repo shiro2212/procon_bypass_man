@@ -124,7 +124,15 @@ class ProconBypassMan::Procon
           end
           isPressButton = user_operation.pressing_all_buttons?(options[:if_pressed])
           if isTilt && isPressButton && isAngleRange
-            @@status[:ongoing_macro] = MacroRegistry.load(macro_name)
+            context = {
+              left_stick_degree: @left_stick_tilting_angle.getDegree(
+                current_position_x: analog_stick.relative_x,
+                current_position_y: analog_stick.relative_y
+              ),
+              left_stick_x: analog_stick.relative_x,
+              left_stick_y: analog_stick.relative_y,
+            }
+            @@status[:ongoing_macro] = MacroRegistry.load(macro_name, force_neutral_buttons: options[:force_neutral], context: context)
             break
           end
 

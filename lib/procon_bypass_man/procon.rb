@@ -92,6 +92,14 @@ class ProconBypassMan::Procon
     end
 
     analog_stick = ProconBypassMan::Procon::AnalogStick.new(binary: raw_input_binary)
+    analog_stick_context = {
+      left_stick_degree: @left_stick_tilting_angle.getDegree(
+        current_position_x: analog_stick.relative_x,
+        current_position_y: analog_stick.relative_y
+      ),
+      left_stick_x: analog_stick.relative_x,
+      left_stick_y: analog_stick.relative_y,
+    }
     add_recent_left_stick_hypotenuses(analog_stick.relative_hypotenuse)
     dumped_tilting_power = @left_stick_tilting_power_scaler.calculate(recent_left_stick_hypotenuses)
 
@@ -125,15 +133,7 @@ class ProconBypassMan::Procon
           end
           isPressButton = user_operation.pressing_all_buttons?(options[:if_pressed])
           if isTilt && isPressButton && isAngleRange
-            context = {
-              left_stick_degree: @left_stick_tilting_angle.getDegree(
-                current_position_x: analog_stick.relative_x,
-                current_position_y: analog_stick.relative_y
-              ),
-              left_stick_x: analog_stick.relative_x,
-              left_stick_y: analog_stick.relative_y,
-            }
-            @@status[:ongoing_macro] = MacroRegistry.load(macro_name, force_neutral_buttons: options[:force_neutral], context: context)
+            @@status[:ongoing_macro] = MacroRegistry.load(macro_name, force_neutral_buttons: options[:force_neutral], context: analog_stick_context)
             break
           end
 
@@ -141,7 +141,7 @@ class ProconBypassMan::Procon
         end
 
         if user_operation.pressing_all_buttons?(options[:if_pressed])
-          @@status[:ongoing_macro] = MacroRegistry.load(macro_name, force_neutral_buttons: options[:force_neutral])
+          @@status[:ongoing_macro] = MacroRegistry.load(macro_name, force_neutral_buttons: options[:force_neutral], context: analog_stick_context)
           break
         end
       end

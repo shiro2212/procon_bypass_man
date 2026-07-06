@@ -114,6 +114,10 @@ class ProconBypassMan::Procon::MacroBuilder
       return { steps: for_forward_ikarole_steps }
     end
 
+    if /^press_down_every_10f/ =~ step
+      return { steps: [:down] + Array.new(9, :none) }
+    end
+
     if /^dynamic_ikarole/ =~ step
       current_degree = @context[:left_stick_degree] || 0
       end_degree = normalize_degree(

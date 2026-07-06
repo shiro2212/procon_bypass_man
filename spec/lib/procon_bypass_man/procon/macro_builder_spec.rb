@@ -226,6 +226,25 @@ describe ProconBypassMan::Procon::MacroBuilder do
         end
       end
 
+      describe 'press_down_every_10f' do
+        it do
+          expect(described_class.new([:press_down_every_10f]).build).to eq([
+            { steps: [
+              :down,
+              :none,
+              :none,
+              :none,
+              :none,
+              :none,
+              :none,
+              :none,
+              :none,
+              :none,
+            ]}
+          ])
+        end
+      end
+
       describe 'dynamic_ikarole' do
         it 'uses the left stick degree from context' do
           expect(described_class.new([:dynamic_ikarole], context: { left_stick_degree: 60 }).build).to eq([

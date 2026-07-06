@@ -58,7 +58,7 @@ class ProconBypassMan::Procon::MacroBuilder
   DYNAMIC_IKAROLE_END_DEGREE = -10
   DYNAMIC_IKAROLE_OFFSET_DEGREE = 60
   DYNAMIC_IKAROLE_START_OFFSET_DEGREE = 90
-  DYNAMIC_IKAROLE_HOLD_FRAMES = 4
+  DYNAMIC_IKAROLE_HOLD_FRAMES = 9
 
   def initialize(steps, context: {})
     @steps = steps.map(&:to_s)

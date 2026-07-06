@@ -241,8 +241,8 @@ describe ProconBypassMan::Procon::MacroBuilder do
               [:tilt_left_stick_completely_to_150deg],
               [:tilt_left_stick_completely_to_150deg],
               [:tilt_left_stick_completely_to_150deg],
-              [:tilt_left_stick_completely_to_50deg, :b],
-              [:tilt_left_stick_completely_to_50deg, :b],
+              [:tilt_left_stick_completely_to_40deg, :b],
+              [:tilt_left_stick_completely_to_40deg, :b],
             ]}
           ])
         end
@@ -261,8 +261,8 @@ describe ProconBypassMan::Procon::MacroBuilder do
               [:tilt_left_stick_completely_to_90deg],
               [:tilt_left_stick_completely_to_90deg],
               [:tilt_left_stick_completely_to_90deg],
-              [:tilt_left_stick_completely_to_350deg, :b],
-              [:tilt_left_stick_completely_to_350deg, :b],
+              [:tilt_left_stick_completely_to_340deg, :b],
+              [:tilt_left_stick_completely_to_340deg, :b],
             ]}
           ])
         end

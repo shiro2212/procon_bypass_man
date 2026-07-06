@@ -230,10 +230,10 @@ describe ProconBypassMan::Procon::MacroBuilder do
         it 'uses the left stick degree from context' do
           expect(described_class.new([:dynamic_ikarole], context: { left_stick_degree: 60 }).build).to eq([
             { steps: [
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
-              [:tilt_left_stick_completely_to_140deg],
+              [:tilt_left_stick_completely_to_150deg],
+              [:tilt_left_stick_completely_to_150deg],
+              [:tilt_left_stick_completely_to_150deg],
+              [:tilt_left_stick_completely_to_150deg],
               [:tilt_left_stick_completely_to_50deg, :b],
               [:tilt_left_stick_completely_to_50deg, :b],
             ]}
@@ -243,21 +243,21 @@ describe ProconBypassMan::Procon::MacroBuilder do
         it 'normalizes negative degrees' do
           expect(described_class.new([:dynamic_ikarole], context: { left_stick_degree: 0 }).build).to eq([
             { steps: [
-              [:tilt_left_stick_completely_to_80deg],
-              [:tilt_left_stick_completely_to_80deg],
-              [:tilt_left_stick_completely_to_80deg],
-              [:tilt_left_stick_completely_to_80deg],
+              [:tilt_left_stick_completely_to_90deg],
+              [:tilt_left_stick_completely_to_90deg],
+              [:tilt_left_stick_completely_to_90deg],
+              [:tilt_left_stick_completely_to_90deg],
               [:tilt_left_stick_completely_to_350deg, :b],
               [:tilt_left_stick_completely_to_350deg, :b],
             ]}
           ])
         end
 
-        it 'derives the start degree from the end degree' do
+        it 'derives the start degree from the current left stick degree' do
           stub_const('ProconBypassMan::Procon::MacroBuilder::DYNAMIC_IKAROLE_END_DEGREE', -20)
 
           expect(described_class.new([:dynamic_ikarole], context: { left_stick_degree: 0 }).build.first[:steps]).to start_with(
-            [:tilt_left_stick_completely_to_70deg]
+            [:tilt_left_stick_completely_to_90deg]
           )
           expect(described_class.new([:dynamic_ikarole], context: { left_stick_degree: 0 }).build.first[:steps].last).to eq(
             [:tilt_left_stick_completely_to_340deg, :b]
@@ -270,10 +270,10 @@ describe ProconBypassMan::Procon::MacroBuilder do
 
           expect(described_class.new([:dynamic_ikarole], context: { left_stick_degree: 60 }).build).to eq([
             { steps: [
-              [:tilt_left_stick_completely_to_210deg],
-              [:tilt_left_stick_completely_to_210deg],
-              [:tilt_left_stick_completely_to_210deg],
-              [:tilt_left_stick_completely_to_210deg],
+              [:tilt_left_stick_completely_to_330deg],
+              [:tilt_left_stick_completely_to_330deg],
+              [:tilt_left_stick_completely_to_330deg],
+              [:tilt_left_stick_completely_to_330deg],
               [:tilt_left_stick_completely_to_120deg, :b],
               [:tilt_left_stick_completely_to_120deg, :b],
             ]}

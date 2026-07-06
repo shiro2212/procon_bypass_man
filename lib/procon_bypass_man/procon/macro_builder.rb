@@ -57,7 +57,7 @@ class ProconBypassMan::Procon::MacroBuilder
   }
   DYNAMIC_IKAROLE_END_DEGREE = -10
   DYNAMIC_IKAROLE_OFFSET_DEGREE = 60
-  DYNAMIC_IKAROLE_START_OFFSET_FROM_END_DEGREE = 90
+  DYNAMIC_IKAROLE_START_OFFSET_DEGREE = 90
   DYNAMIC_IKAROLE_HOLD_FRAMES = 4
 
   def initialize(steps, context: {})
@@ -123,7 +123,9 @@ class ProconBypassMan::Procon::MacroBuilder
           current_degree + DYNAMIC_IKAROLE_OFFSET_DEGREE
         end
       )
-      start_degree = normalize_degree(end_degree + DYNAMIC_IKAROLE_START_OFFSET_FROM_END_DEGREE)
+      end_offset = DYNAMIC_IKAROLE_END_DEGREE || DYNAMIC_IKAROLE_OFFSET_DEGREE
+      start_offset = end_offset.negative? ? DYNAMIC_IKAROLE_START_OFFSET_DEGREE : -DYNAMIC_IKAROLE_START_OFFSET_DEGREE
+      start_degree = normalize_degree(current_degree + start_offset)
       start_step = :"tilt_left_stick_completely_to_#{start_degree}deg"
       end_step = :"tilt_left_stick_completely_to_#{end_degree}deg"
       return { steps: Array.new(DYNAMIC_IKAROLE_HOLD_FRAMES) { [start_step] } + [[end_step, :b], [end_step, :b]] }
